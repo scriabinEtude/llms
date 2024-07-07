@@ -21,7 +21,7 @@ OpenAIMessage _$OpenAIMessageFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$OpenAIMessage {
   String get role => throw _privateConstructorUsedError;
-  String? get content => throw _privateConstructorUsedError;
+  dynamic get content => throw _privateConstructorUsedError;
   List<OpenAIToolCell>? get toolCalls => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -36,7 +36,7 @@ abstract class $OpenAIMessageCopyWith<$Res> {
           OpenAIMessage value, $Res Function(OpenAIMessage) then) =
       _$OpenAIMessageCopyWithImpl<$Res, OpenAIMessage>;
   @useResult
-  $Res call({String role, String? content, List<OpenAIToolCell>? toolCalls});
+  $Res call({String role, dynamic content, List<OpenAIToolCell>? toolCalls});
 }
 
 /// @nodoc
@@ -64,7 +64,7 @@ class _$OpenAIMessageCopyWithImpl<$Res, $Val extends OpenAIMessage>
       content: freezed == content
           ? _value.content
           : content // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as dynamic,
       toolCalls: freezed == toolCalls
           ? _value.toolCalls
           : toolCalls // ignore: cast_nullable_to_non_nullable
@@ -81,7 +81,7 @@ abstract class _$$OpenAIMessageImplCopyWith<$Res>
       __$$OpenAIMessageImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String role, String? content, List<OpenAIToolCell>? toolCalls});
+  $Res call({String role, dynamic content, List<OpenAIToolCell>? toolCalls});
 }
 
 /// @nodoc
@@ -107,7 +107,7 @@ class __$$OpenAIMessageImplCopyWithImpl<$Res>
       content: freezed == content
           ? _value.content
           : content // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as dynamic,
       toolCalls: freezed == toolCalls
           ? _value._toolCalls
           : toolCalls // ignore: cast_nullable_to_non_nullable
@@ -130,7 +130,7 @@ class _$OpenAIMessageImpl extends _OpenAIMessage {
   @override
   final String role;
   @override
-  final String? content;
+  final dynamic content;
   final List<OpenAIToolCell>? _toolCalls;
   @override
   List<OpenAIToolCell>? get toolCalls {
@@ -152,14 +152,17 @@ class _$OpenAIMessageImpl extends _OpenAIMessage {
         (other.runtimeType == runtimeType &&
             other is _$OpenAIMessageImpl &&
             (identical(other.role, role) || other.role == role) &&
-            (identical(other.content, content) || other.content == content) &&
+            const DeepCollectionEquality().equals(other.content, content) &&
             const DeepCollectionEquality()
                 .equals(other._toolCalls, _toolCalls));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, role, content,
+  int get hashCode => Object.hash(
+      runtimeType,
+      role,
+      const DeepCollectionEquality().hash(content),
       const DeepCollectionEquality().hash(_toolCalls));
 
   @JsonKey(ignore: true)
@@ -179,7 +182,7 @@ class _$OpenAIMessageImpl extends _OpenAIMessage {
 abstract class _OpenAIMessage extends OpenAIMessage {
   const factory _OpenAIMessage(
       {required final String role,
-      final String? content,
+      final dynamic content,
       final List<OpenAIToolCell>? toolCalls}) = _$OpenAIMessageImpl;
   const _OpenAIMessage._() : super._();
 
@@ -189,7 +192,7 @@ abstract class _OpenAIMessage extends OpenAIMessage {
   @override
   String get role;
   @override
-  String? get content;
+  dynamic get content;
   @override
   List<OpenAIToolCell>? get toolCalls;
   @override

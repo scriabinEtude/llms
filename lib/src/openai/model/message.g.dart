@@ -9,7 +9,7 @@ part of 'message.dart';
 _$OpenAIMessageImpl _$$OpenAIMessageImplFromJson(Map<String, dynamic> json) =>
     _$OpenAIMessageImpl(
       role: json['role'] as String,
-      content: json['content'] as String?,
+      content: json['content'],
       toolCalls: (json['tool_calls'] as List<dynamic>?)
           ?.map((e) => OpenAIToolCell.fromJson(e as Map<String, dynamic>))
           .toList(),

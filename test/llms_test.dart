@@ -103,4 +103,20 @@ void main() {
     expect(imageResponse, isA<OpenAIImageResponse>());
     print(imageResponse.first);
   });
+
+  test('chat completion image input', () async {
+    final chatCompletion = await _client.chat.chatCompletion(
+      model: OpenAIModelType.gpt_4o_2024_05_13,
+      messages: [
+        OpenAIMessage.system("You are a helpful assistant."),
+        OpenAIMessage.imageUrl(
+          message: "What's in this image?",
+          url:
+              "https://upload.wikimedia.org/wikipedia/commons/thumb/d/dd/Gfp-wisconsin-madison-the-nature-boardwalk.jpg/2560px-Gfp-wisconsin-madison-the-nature-boardwalk.jpg",
+        ),
+      ],
+    );
+    expect(chatCompletion, isA<OpenAIChatCompletion>());
+    print(chatCompletion.choices.firstOrNull?.message.content);
+  });
 }

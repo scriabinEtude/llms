@@ -20,11 +20,14 @@ class OpenAIChatService {
     tools?.forEach((tool) {
       print(tool.toJson());
     });
+    messages.forEach((message) {
+      print(message.toJson());
+    });
     final response = await client.post(
       "/chat/completions",
       body: {
         "model": model.name,
-        "messages": messages,
+        "messages": messages.map((e) => e.toJson()).toList(),
         if (tools != null) "tools": tools,
         if (tools != null) "tool_choice": "auto",
       },

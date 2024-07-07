@@ -37,9 +37,12 @@ class OpenAIMessage with _$OpenAIMessage {
     required String url,
   }) =>
       OpenAIMessage(
-        role: "assistant",
+        role: "user",
         content: [
-          {"type": "text", "text": "What'\''s in this image?"},
+          {
+            "type": "text",
+            "text": message,
+          },
           {
             "type": "image_url",
             "image_url": {
