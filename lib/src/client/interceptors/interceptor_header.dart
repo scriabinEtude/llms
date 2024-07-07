@@ -3,8 +3,10 @@ import 'package:dio/dio.dart';
 class InterceptorHeader extends InterceptorsWrapper {
   final String keyOrganizationId;
   final String keyProjectId;
+  final String apiKey;
 
   InterceptorHeader({
+    required this.apiKey,
     required this.keyOrganizationId,
     required this.keyProjectId,
   }) : super(
@@ -14,6 +16,7 @@ class InterceptorHeader extends InterceptorsWrapper {
               "OpenAI-Organization": keyOrganizationId,
               "OpenAI-Project": keyProjectId,
               "OpenAI-Beta": "assistants=v2",
+              "Authorization": "Bearer $apiKey"
             });
             return handler.next(options);
           },

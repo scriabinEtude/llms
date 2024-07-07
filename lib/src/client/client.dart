@@ -6,17 +6,20 @@ class OpenAIClient {
   late final String baseUrl;
   late final String keyOrganizationId;
   late final String keyProjectId;
+  late final String apiKey;
   late final Dio _client;
 
   OpenAIClient({
     required this.baseUrl,
     required this.keyOrganizationId,
     required this.keyProjectId,
+    required this.apiKey,
   }) : _client = Dio(
           BaseOptions(baseUrl: baseUrl),
         )..interceptors.addAll([
             InterceptorLogger(),
             InterceptorHeader(
+              apiKey: apiKey,
               keyOrganizationId: keyOrganizationId,
               keyProjectId: keyProjectId,
             ),
@@ -33,13 +36,13 @@ class OpenAIClient {
   }
 
   Future<Response<T>> post<T>(
-    String path,
-    Map<String, dynamic> data, {
+    String path, {
+    Map<String, dynamic>? body,
     Options? options,
   }) async {
     return await _client.post<T>(
       path,
-      data: data,
+      data: body,
       options: options,
     );
   }
