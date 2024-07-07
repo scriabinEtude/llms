@@ -190,7 +190,7 @@ class __$$OpenAIChatCompletionImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$OpenAIChatCompletionImpl implements _OpenAIChatCompletion {
+class _$OpenAIChatCompletionImpl extends _OpenAIChatCompletion {
   const _$OpenAIChatCompletionImpl(
       {required this.id,
       required this.object,
@@ -199,7 +199,8 @@ class _$OpenAIChatCompletionImpl implements _OpenAIChatCompletion {
       required this.systemFingerprint,
       final List<OpenAIChoice> choices = const [],
       required this.usage})
-      : _choices = choices;
+      : _choices = choices,
+        super._();
 
   factory _$OpenAIChatCompletionImpl.fromJson(Map<String, dynamic> json) =>
       _$$OpenAIChatCompletionImplFromJson(json);
@@ -267,7 +268,7 @@ class _$OpenAIChatCompletionImpl implements _OpenAIChatCompletion {
   }
 }
 
-abstract class _OpenAIChatCompletion implements OpenAIChatCompletion {
+abstract class _OpenAIChatCompletion extends OpenAIChatCompletion {
   const factory _OpenAIChatCompletion(
       {required final String id,
       required final String object,
@@ -276,6 +277,7 @@ abstract class _OpenAIChatCompletion implements OpenAIChatCompletion {
       required final String systemFingerprint,
       final List<OpenAIChoice> choices,
       required final OpenAIUsage usage}) = _$OpenAIChatCompletionImpl;
+  const _OpenAIChatCompletion._() : super._();
 
   factory _OpenAIChatCompletion.fromJson(Map<String, dynamic> json) =
       _$OpenAIChatCompletionImpl.fromJson;

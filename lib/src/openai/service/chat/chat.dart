@@ -3,6 +3,7 @@ import 'package:llms/src/client/util/convertor.dart';
 import 'package:llms/src/openai/enum/model.dart';
 import 'package:llms/src/openai/model/chat_completion.dart';
 import 'package:llms/src/openai/model/message.dart';
+import 'package:llms/src/openai/model/tool.dart';
 
 class OpenAIChatService {
   final OpenAIClient client;
@@ -14,12 +15,18 @@ class OpenAIChatService {
   Future<OpenAIChatCompletion> chatCompletion({
     required OpenAIModelType model,
     required List<OpenAIMessage> messages,
+    List<OpenAITool>? tools,
   }) async {
+    tools?.forEach((tool) {
+      print(tool.toJson());
+    });
     final response = await client.post(
       "/chat/completions",
       body: {
         "model": model.name,
         "messages": messages,
+        if (tools != null) "tools": tools,
+        if (tools != null) "tool_choice": "auto",
       },
     );
 

@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:llms/src/openai/model/tool_cell.dart';
 
 part 'message.freezed.dart';
 part 'message.g.dart';
@@ -9,7 +10,8 @@ class OpenAIMessage with _$OpenAIMessage {
 
   const factory OpenAIMessage({
     required String role,
-    required String content,
+    String? content,
+    List<OpenAIToolCell>? toolCalls,
   }) = _OpenAIMessage;
 
   factory OpenAIMessage.fromJson(Map<String, dynamic> json) =>

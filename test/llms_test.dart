@@ -1,12 +1,12 @@
-import 'dart:developer';
-
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:llms/llms.dart';
 import 'package:llms/src/openai/enum/model.dart';
 import 'package:llms/src/openai/model/chat_completion.dart';
+import 'package:llms/src/openai/model/function.dart';
 import 'package:llms/src/openai/model/message.dart';
 import 'package:llms/src/openai/model/model.dart';
+import 'package:llms/src/openai/model/tool.dart';
 
 import '../env.dart';
 
@@ -39,5 +39,35 @@ void main() {
     );
     expect(chatCompletion, isA<OpenAIChatCompletion>());
     // print(chatCompletion.choices.firstOrNull?.message.content);
+  });
+
+  test("chat completion tools for image", () async {
+    final chatCompletion = await _client.chat.chatCompletion(
+      model: OpenAIModelType.gpt_4o_2024_05_13,
+      messages: [
+        OpenAIMessage.system("You are a helpful assistant."),
+        OpenAIMessage.user("generate image of cat"),
+      ],
+      tools: [
+        OpenAITool.function(function: OpenAIFunction.image()),
+      ],
+    );
+    expect(chatCompletion, isA<OpenAIChatCompletion>());
+    // print(chatCompletion.firstMessage.toolCalls);
+  });
+
+  test("chat completion tools but not use", () async {
+    final chatCompletion = await _client.chat.chatCompletion(
+      model: OpenAIModelType.gpt_4o_2024_05_13,
+      messages: [
+        OpenAIMessage.system("You are a helpful assistant."),
+        OpenAIMessage.user("the meaning of a word 'category'"),
+      ],
+      tools: [
+        OpenAITool.function(function: OpenAIFunction.image()),
+      ],
+    );
+    expect(chatCompletion, isA<OpenAIChatCompletion>());
+    // print(chatCompletion.firstMessage.toolCalls);
   });
 }
