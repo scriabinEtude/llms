@@ -10,7 +10,7 @@ class OpenAIMessage with _$OpenAIMessage {
 
   const factory OpenAIMessage({
     required String role,
-    String? content,
+    dynamic content,
     List<OpenAIToolCell>? toolCalls,
   }) = _OpenAIMessage;
 
@@ -30,5 +30,22 @@ class OpenAIMessage with _$OpenAIMessage {
   factory OpenAIMessage.assistant(String content) => OpenAIMessage(
         role: "assistant",
         content: content,
+      );
+
+  factory OpenAIMessage.imageUrl({
+    required String message,
+    required String url,
+  }) =>
+      OpenAIMessage(
+        role: "assistant",
+        content: [
+          {"type": "text", "text": "What'\''s in this image?"},
+          {
+            "type": "image_url",
+            "image_url": {
+              "url": url,
+            }
+          }
+        ],
       );
 }
