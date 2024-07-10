@@ -46,4 +46,20 @@ class OpenAIClient {
       options: options,
     );
   }
+
+  Future<Response<T>> postFile<T>(
+    String path, {
+    String? filePath,
+    Map<String, dynamic>? data,
+    Options? options,
+  }) async {
+    return await _client.post<T>(
+      path,
+      data: FormData.fromMap({
+        'file': await MultipartFile.fromFile(filePath!),
+        ...?data,
+      }),
+      options: options,
+    );
+  }
 }

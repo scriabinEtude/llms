@@ -1,8 +1,10 @@
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:llms/llms.dart';
+import 'package:llms/src/openai/enum/file.dart';
 import 'package:llms/src/openai/enum/model.dart';
 import 'package:llms/src/openai/model/chat_completion.dart';
+import 'package:llms/src/openai/model/file.dart';
 import 'package:llms/src/openai/model/function.dart';
 import 'package:llms/src/openai/model/image.dart';
 import 'package:llms/src/openai/model/message.dart';
@@ -118,5 +120,22 @@ void main() {
     );
     expect(chatCompletion, isA<OpenAIChatCompletion>());
     print(chatCompletion.choices.firstOrNull?.message.content);
+  });
+
+  test('file upload', () async {
+    final file = await _client.file.uploadFile(
+      filePath: "test/data/screenshot.png",
+      purpose: FilePurpose.vision,
+    );
+    expect(file, isA<OpenAIFile>());
+    // print(file);
+  });
+
+  test('file list', () async {
+    final files = await _client.file.listFiles();
+    expect(files, isA<List<OpenAIFile>>());
+    // files.forEach((e) {
+    //   print(e);
+    // });
   });
 }
