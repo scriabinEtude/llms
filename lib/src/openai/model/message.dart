@@ -51,4 +51,24 @@ class OpenAIMessage with _$OpenAIMessage {
           }
         ],
       );
+
+  factory OpenAIMessage.imageFile({
+    required String message,
+    required String fileId,
+  }) =>
+      OpenAIMessage(
+        role: "user",
+        content: [
+          {
+            "type": "text",
+            "text": message,
+          },
+          {
+            "type": "image_file",
+            "image_file": {
+              "file_id": fileId,
+            }
+          }
+        ],
+      );
 }
