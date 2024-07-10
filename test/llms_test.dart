@@ -119,7 +119,7 @@ void main() {
       ],
     );
     expect(chatCompletion, isA<OpenAIChatCompletion>());
-    print(chatCompletion.choices.firstOrNull?.message.content);
+    // print(chatCompletion.choices.firstOrNull?.message.content);
   });
 
   test('file upload', () async {
