@@ -15,7 +15,7 @@ _$OpenAIThreadRunImpl _$$OpenAIThreadRunImplFromJson(
       assistantId: json['assistant_id'] as String,
       threadId: json['thread_id'] as String,
       status: json['status'] as String,
-      startedAt: (json['started_at'] as num).toInt(),
+      startedAt: (json['started_at'] as num?)?.toInt(),
       expiresAt: (json['expires_at'] as num?)?.toInt(),
       cancelledAt: (json['cancelled_at'] as num?)?.toInt(),
       failedAt: (json['failed_at'] as num?)?.toInt(),
@@ -31,7 +31,9 @@ _$OpenAIThreadRunImpl _$$OpenAIThreadRunImplFromJson(
           const [],
       metadata: json['metadata'] as Map<String, dynamic>? ?? const {},
       incompleteDetails: json['incomplete_details'] as String?,
-      usage: OpenAIUsage.fromJson(json['usage'] as Map<String, dynamic>),
+      usage: json['usage'] == null
+          ? null
+          : OpenAIUsage.fromJson(json['usage'] as Map<String, dynamic>),
       temperature: (json['temperature'] as num).toDouble(),
       topP: (json['top_p'] as num).toDouble(),
       maxCompletionTokens: (json['max_completion_tokens'] as num?)?.toInt(),
@@ -64,7 +66,7 @@ Map<String, dynamic> _$$OpenAIThreadRunImplToJson(
       'tools': instance.tools.map((e) => e.toJson()).toList(),
       'metadata': instance.metadata,
       'incomplete_details': instance.incompleteDetails,
-      'usage': instance.usage.toJson(),
+      'usage': instance.usage?.toJson(),
       'temperature': instance.temperature,
       'top_p': instance.topP,
       'max_completion_tokens': instance.maxCompletionTokens,

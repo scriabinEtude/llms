@@ -19,9 +19,6 @@ class OpenAIThreadService {
     String threadId,
     OpenAIMessage content,
   ) async {
-    print(content.toJson());
-    print("");
-
     final response = await client.post(
       '/threads/$threadId/messages',
       body: content.toJson(),
@@ -34,9 +31,16 @@ class OpenAIThreadService {
     return response.many(OpenAIThreadMessage.fromJson);
   }
 
-  Future<OpenAIThreadRun> createRun(
-      {required String threadId, required String assistant_}) async {
-    final response = await client.post('/threads/$threadId/runs');
+  Future<OpenAIThreadRun> createRun({
+    required String threadId,
+    required String assistant,
+  }) async {
+    final response = await client.post(
+      '/threads/$threadId/runs',
+      body: {
+        "assistant_id": assistant,
+      },
+    );
     return response.one(OpenAIThreadRun.fromJson);
   }
 }

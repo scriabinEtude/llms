@@ -26,7 +26,7 @@ mixin _$OpenAIThreadRun {
   String get assistantId => throw _privateConstructorUsedError;
   String get threadId => throw _privateConstructorUsedError;
   String get status => throw _privateConstructorUsedError;
-  int get startedAt => throw _privateConstructorUsedError;
+  int? get startedAt => throw _privateConstructorUsedError;
   int? get expiresAt => throw _privateConstructorUsedError;
   int? get cancelledAt => throw _privateConstructorUsedError;
   int? get failedAt => throw _privateConstructorUsedError;
@@ -38,7 +38,7 @@ mixin _$OpenAIThreadRun {
   List<OpenAIThreadRunTool> get tools => throw _privateConstructorUsedError;
   Map<String, dynamic> get metadata => throw _privateConstructorUsedError;
   String? get incompleteDetails => throw _privateConstructorUsedError;
-  OpenAIUsage get usage => throw _privateConstructorUsedError;
+  OpenAIUsage? get usage => throw _privateConstructorUsedError;
   double get temperature => throw _privateConstructorUsedError;
   double get topP => throw _privateConstructorUsedError;
   int? get maxCompletionTokens => throw _privateConstructorUsedError;
@@ -68,7 +68,7 @@ abstract class $OpenAIThreadRunCopyWith<$Res> {
       String assistantId,
       String threadId,
       String status,
-      int startedAt,
+      int? startedAt,
       int? expiresAt,
       int? cancelledAt,
       int? failedAt,
@@ -80,7 +80,7 @@ abstract class $OpenAIThreadRunCopyWith<$Res> {
       List<OpenAIThreadRunTool> tools,
       Map<String, dynamic> metadata,
       String? incompleteDetails,
-      OpenAIUsage usage,
+      OpenAIUsage? usage,
       double temperature,
       double topP,
       int? maxCompletionTokens,
@@ -90,7 +90,7 @@ abstract class $OpenAIThreadRunCopyWith<$Res> {
       String toolChoice,
       bool parallelToolCalls});
 
-  $OpenAIUsageCopyWith<$Res> get usage;
+  $OpenAIUsageCopyWith<$Res>? get usage;
   $TruncationStrategyCopyWith<$Res> get truncationStrategy;
 }
 
@@ -113,7 +113,7 @@ class _$OpenAIThreadRunCopyWithImpl<$Res, $Val extends OpenAIThreadRun>
     Object? assistantId = null,
     Object? threadId = null,
     Object? status = null,
-    Object? startedAt = null,
+    Object? startedAt = freezed,
     Object? expiresAt = freezed,
     Object? cancelledAt = freezed,
     Object? failedAt = freezed,
@@ -125,7 +125,7 @@ class _$OpenAIThreadRunCopyWithImpl<$Res, $Val extends OpenAIThreadRun>
     Object? tools = null,
     Object? metadata = null,
     Object? incompleteDetails = freezed,
-    Object? usage = null,
+    Object? usage = freezed,
     Object? temperature = null,
     Object? topP = null,
     Object? maxCompletionTokens = freezed,
@@ -160,10 +160,10 @@ class _$OpenAIThreadRunCopyWithImpl<$Res, $Val extends OpenAIThreadRun>
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as String,
-      startedAt: null == startedAt
+      startedAt: freezed == startedAt
           ? _value.startedAt
           : startedAt // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       expiresAt: freezed == expiresAt
           ? _value.expiresAt
           : expiresAt // ignore: cast_nullable_to_non_nullable
@@ -208,10 +208,10 @@ class _$OpenAIThreadRunCopyWithImpl<$Res, $Val extends OpenAIThreadRun>
           ? _value.incompleteDetails
           : incompleteDetails // ignore: cast_nullable_to_non_nullable
               as String?,
-      usage: null == usage
+      usage: freezed == usage
           ? _value.usage
           : usage // ignore: cast_nullable_to_non_nullable
-              as OpenAIUsage,
+              as OpenAIUsage?,
       temperature: null == temperature
           ? _value.temperature
           : temperature // ignore: cast_nullable_to_non_nullable
@@ -249,8 +249,12 @@ class _$OpenAIThreadRunCopyWithImpl<$Res, $Val extends OpenAIThreadRun>
 
   @override
   @pragma('vm:prefer-inline')
-  $OpenAIUsageCopyWith<$Res> get usage {
-    return $OpenAIUsageCopyWith<$Res>(_value.usage, (value) {
+  $OpenAIUsageCopyWith<$Res>? get usage {
+    if (_value.usage == null) {
+      return null;
+    }
+
+    return $OpenAIUsageCopyWith<$Res>(_value.usage!, (value) {
       return _then(_value.copyWith(usage: value) as $Val);
     });
   }
@@ -280,7 +284,7 @@ abstract class _$$OpenAIThreadRunImplCopyWith<$Res>
       String assistantId,
       String threadId,
       String status,
-      int startedAt,
+      int? startedAt,
       int? expiresAt,
       int? cancelledAt,
       int? failedAt,
@@ -292,7 +296,7 @@ abstract class _$$OpenAIThreadRunImplCopyWith<$Res>
       List<OpenAIThreadRunTool> tools,
       Map<String, dynamic> metadata,
       String? incompleteDetails,
-      OpenAIUsage usage,
+      OpenAIUsage? usage,
       double temperature,
       double topP,
       int? maxCompletionTokens,
@@ -303,7 +307,7 @@ abstract class _$$OpenAIThreadRunImplCopyWith<$Res>
       bool parallelToolCalls});
 
   @override
-  $OpenAIUsageCopyWith<$Res> get usage;
+  $OpenAIUsageCopyWith<$Res>? get usage;
   @override
   $TruncationStrategyCopyWith<$Res> get truncationStrategy;
 }
@@ -325,7 +329,7 @@ class __$$OpenAIThreadRunImplCopyWithImpl<$Res>
     Object? assistantId = null,
     Object? threadId = null,
     Object? status = null,
-    Object? startedAt = null,
+    Object? startedAt = freezed,
     Object? expiresAt = freezed,
     Object? cancelledAt = freezed,
     Object? failedAt = freezed,
@@ -337,7 +341,7 @@ class __$$OpenAIThreadRunImplCopyWithImpl<$Res>
     Object? tools = null,
     Object? metadata = null,
     Object? incompleteDetails = freezed,
-    Object? usage = null,
+    Object? usage = freezed,
     Object? temperature = null,
     Object? topP = null,
     Object? maxCompletionTokens = freezed,
@@ -372,10 +376,10 @@ class __$$OpenAIThreadRunImplCopyWithImpl<$Res>
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as String,
-      startedAt: null == startedAt
+      startedAt: freezed == startedAt
           ? _value.startedAt
           : startedAt // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       expiresAt: freezed == expiresAt
           ? _value.expiresAt
           : expiresAt // ignore: cast_nullable_to_non_nullable
@@ -420,10 +424,10 @@ class __$$OpenAIThreadRunImplCopyWithImpl<$Res>
           ? _value.incompleteDetails
           : incompleteDetails // ignore: cast_nullable_to_non_nullable
               as String?,
-      usage: null == usage
+      usage: freezed == usage
           ? _value.usage
           : usage // ignore: cast_nullable_to_non_nullable
-              as OpenAIUsage,
+              as OpenAIUsage?,
       temperature: null == temperature
           ? _value.temperature
           : temperature // ignore: cast_nullable_to_non_nullable
@@ -470,7 +474,7 @@ class _$OpenAIThreadRunImpl implements _OpenAIThreadRun {
       required this.assistantId,
       required this.threadId,
       required this.status,
-      required this.startedAt,
+      this.startedAt,
       this.expiresAt,
       this.cancelledAt,
       this.failedAt,
@@ -482,7 +486,7 @@ class _$OpenAIThreadRunImpl implements _OpenAIThreadRun {
       final List<OpenAIThreadRunTool> tools = const [],
       final Map<String, dynamic> metadata = const {},
       this.incompleteDetails,
-      required this.usage,
+      this.usage,
       required this.temperature,
       required this.topP,
       this.maxCompletionTokens,
@@ -510,7 +514,7 @@ class _$OpenAIThreadRunImpl implements _OpenAIThreadRun {
   @override
   final String status;
   @override
-  final int startedAt;
+  final int? startedAt;
   @override
   final int? expiresAt;
   @override
@@ -548,7 +552,7 @@ class _$OpenAIThreadRunImpl implements _OpenAIThreadRun {
   @override
   final String? incompleteDetails;
   @override
-  final OpenAIUsage usage;
+  final OpenAIUsage? usage;
   @override
   final double temperature;
   @override
@@ -680,7 +684,7 @@ abstract class _OpenAIThreadRun implements OpenAIThreadRun {
       required final String assistantId,
       required final String threadId,
       required final String status,
-      required final int startedAt,
+      final int? startedAt,
       final int? expiresAt,
       final int? cancelledAt,
       final int? failedAt,
@@ -692,7 +696,7 @@ abstract class _OpenAIThreadRun implements OpenAIThreadRun {
       final List<OpenAIThreadRunTool> tools,
       final Map<String, dynamic> metadata,
       final String? incompleteDetails,
-      required final OpenAIUsage usage,
+      final OpenAIUsage? usage,
       required final double temperature,
       required final double topP,
       final int? maxCompletionTokens,
@@ -718,7 +722,7 @@ abstract class _OpenAIThreadRun implements OpenAIThreadRun {
   @override
   String get status;
   @override
-  int get startedAt;
+  int? get startedAt;
   @override
   int? get expiresAt;
   @override
@@ -742,7 +746,7 @@ abstract class _OpenAIThreadRun implements OpenAIThreadRun {
   @override
   String? get incompleteDetails;
   @override
-  OpenAIUsage get usage;
+  OpenAIUsage? get usage;
   @override
   double get temperature;
   @override

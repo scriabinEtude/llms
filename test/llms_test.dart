@@ -11,6 +11,7 @@ import 'package:llms/src/openai/model/message.dart';
 import 'package:llms/src/openai/model/model.dart';
 import 'package:llms/src/openai/model/thread.dart';
 import 'package:llms/src/openai/model/thread_message.dart';
+import 'package:llms/src/openai/model/thread_run.dart';
 import 'package:llms/src/openai/model/tool.dart';
 
 import '../env.dart';
@@ -156,5 +157,21 @@ void main() {
     );
     expect(message, isA<OpenAIThreadMessage>());
     print(message);
+  });
+
+  test('create thread, add a message and run', () async {
+    final thread = await _client.thread.createThread();
+    expect(thread, isA<OpenAIThread>());
+    final message = await _client.thread.createMessage(
+      thread.id,
+      OpenAIMessage.user("hello"),
+    );
+    final run = await _client.thread.createRun(
+      threadId: thread.id,
+      assistant: openaiAssistantId,
+    );
+    expect(run, isA<OpenAIThreadRun>());
+    print(message);
+    print(run);
   });
 }
