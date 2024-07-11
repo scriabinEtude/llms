@@ -15,9 +15,19 @@ _$OpenAIMessageImpl _$$OpenAIMessageImplFromJson(Map<String, dynamic> json) =>
           .toList(),
     );
 
-Map<String, dynamic> _$$OpenAIMessageImplToJson(_$OpenAIMessageImpl instance) =>
-    <String, dynamic>{
-      'role': instance.role,
-      'content': instance.content,
-      'tool_calls': instance.toolCalls?.map((e) => e.toJson()).toList(),
-    };
+Map<String, dynamic> _$$OpenAIMessageImplToJson(_$OpenAIMessageImpl instance) {
+  final val = <String, dynamic>{
+    'role': instance.role,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('content', instance.content);
+  writeNotNull(
+      'tool_calls', instance.toolCalls?.map((e) => e.toJson()).toList());
+  return val;
+}

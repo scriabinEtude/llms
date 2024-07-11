@@ -15,8 +15,8 @@ _$OpenAIThreadMessageImpl _$$OpenAIThreadMessageImplFromJson(
       threadId: json['thread_id'] as String,
       role: json['role'] as String,
       content: json['content'] as List<dynamic>,
-      assistantId: json['assistant_id'] as String,
-      runId: json['run_id'] as String,
+      assistantId: json['assistant_id'] as String?,
+      runId: json['run_id'] as String?,
       attachments: json['attachments'] as List<dynamic>? ?? const [],
       metadata: json['metadata'] as Map<String, dynamic>? ?? const {},
     );

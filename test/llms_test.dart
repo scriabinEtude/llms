@@ -9,6 +9,8 @@ import 'package:llms/src/openai/model/function.dart';
 import 'package:llms/src/openai/model/image.dart';
 import 'package:llms/src/openai/model/message.dart';
 import 'package:llms/src/openai/model/model.dart';
+import 'package:llms/src/openai/model/thread.dart';
+import 'package:llms/src/openai/model/thread_message.dart';
 import 'package:llms/src/openai/model/tool.dart';
 
 import '../env.dart';
@@ -137,5 +139,22 @@ void main() {
     // files.forEach((e) {
     //   print(e);
     // });
+  });
+
+  test('create a thread', () async {
+    final thread = await _client.thread.createThread();
+    expect(thread, isA<OpenAIThread>());
+    print(thread);
+  });
+
+  test('create thread and add a message', () async {
+    final thread = await _client.thread.createThread();
+    expect(thread, isA<OpenAIThread>());
+    final message = await _client.thread.createMessage(
+      thread.id,
+      OpenAIMessage.user("hello"),
+    );
+    expect(message, isA<OpenAIThreadMessage>());
+    print(message);
   });
 }

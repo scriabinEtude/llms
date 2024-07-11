@@ -12,8 +12,8 @@ class OpenAIThreadMessage with _$OpenAIThreadMessage {
     required String threadId,
     required String role,
     required List<dynamic> content,
-    required String assistantId,
-    required String runId,
+    String? assistantId,
+    String? runId,
     @Default([]) List<dynamic> attachments,
     @Default({}) Map<String, dynamic> metadata,
   }) = _OpenAIThreadMessage;

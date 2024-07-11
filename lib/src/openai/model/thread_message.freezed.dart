@@ -26,8 +26,8 @@ mixin _$OpenAIThreadMessage {
   String get threadId => throw _privateConstructorUsedError;
   String get role => throw _privateConstructorUsedError;
   List<dynamic> get content => throw _privateConstructorUsedError;
-  String get assistantId => throw _privateConstructorUsedError;
-  String get runId => throw _privateConstructorUsedError;
+  String? get assistantId => throw _privateConstructorUsedError;
+  String? get runId => throw _privateConstructorUsedError;
   List<dynamic> get attachments => throw _privateConstructorUsedError;
   Map<String, dynamic> get metadata => throw _privateConstructorUsedError;
 
@@ -50,8 +50,8 @@ abstract class $OpenAIThreadMessageCopyWith<$Res> {
       String threadId,
       String role,
       List<dynamic> content,
-      String assistantId,
-      String runId,
+      String? assistantId,
+      String? runId,
       List<dynamic> attachments,
       Map<String, dynamic> metadata});
 }
@@ -75,8 +75,8 @@ class _$OpenAIThreadMessageCopyWithImpl<$Res, $Val extends OpenAIThreadMessage>
     Object? threadId = null,
     Object? role = null,
     Object? content = null,
-    Object? assistantId = null,
-    Object? runId = null,
+    Object? assistantId = freezed,
+    Object? runId = freezed,
     Object? attachments = null,
     Object? metadata = null,
   }) {
@@ -105,14 +105,14 @@ class _$OpenAIThreadMessageCopyWithImpl<$Res, $Val extends OpenAIThreadMessage>
           ? _value.content
           : content // ignore: cast_nullable_to_non_nullable
               as List<dynamic>,
-      assistantId: null == assistantId
+      assistantId: freezed == assistantId
           ? _value.assistantId
           : assistantId // ignore: cast_nullable_to_non_nullable
-              as String,
-      runId: null == runId
+              as String?,
+      runId: freezed == runId
           ? _value.runId
           : runId // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       attachments: null == attachments
           ? _value.attachments
           : attachments // ignore: cast_nullable_to_non_nullable
@@ -140,8 +140,8 @@ abstract class _$$OpenAIThreadMessageImplCopyWith<$Res>
       String threadId,
       String role,
       List<dynamic> content,
-      String assistantId,
-      String runId,
+      String? assistantId,
+      String? runId,
       List<dynamic> attachments,
       Map<String, dynamic> metadata});
 }
@@ -163,8 +163,8 @@ class __$$OpenAIThreadMessageImplCopyWithImpl<$Res>
     Object? threadId = null,
     Object? role = null,
     Object? content = null,
-    Object? assistantId = null,
-    Object? runId = null,
+    Object? assistantId = freezed,
+    Object? runId = freezed,
     Object? attachments = null,
     Object? metadata = null,
   }) {
@@ -193,14 +193,14 @@ class __$$OpenAIThreadMessageImplCopyWithImpl<$Res>
           ? _value._content
           : content // ignore: cast_nullable_to_non_nullable
               as List<dynamic>,
-      assistantId: null == assistantId
+      assistantId: freezed == assistantId
           ? _value.assistantId
           : assistantId // ignore: cast_nullable_to_non_nullable
-              as String,
-      runId: null == runId
+              as String?,
+      runId: freezed == runId
           ? _value.runId
           : runId // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       attachments: null == attachments
           ? _value._attachments
           : attachments // ignore: cast_nullable_to_non_nullable
@@ -223,8 +223,8 @@ class _$OpenAIThreadMessageImpl implements _OpenAIThreadMessage {
       required this.threadId,
       required this.role,
       required final List<dynamic> content,
-      required this.assistantId,
-      required this.runId,
+      this.assistantId,
+      this.runId,
       final List<dynamic> attachments = const [],
       final Map<String, dynamic> metadata = const {}})
       : _content = content,
@@ -253,9 +253,9 @@ class _$OpenAIThreadMessageImpl implements _OpenAIThreadMessage {
   }
 
   @override
-  final String assistantId;
+  final String? assistantId;
   @override
-  final String runId;
+  final String? runId;
   final List<dynamic> _attachments;
   @override
   @JsonKey()
@@ -338,8 +338,8 @@ abstract class _OpenAIThreadMessage implements OpenAIThreadMessage {
       required final String threadId,
       required final String role,
       required final List<dynamic> content,
-      required final String assistantId,
-      required final String runId,
+      final String? assistantId,
+      final String? runId,
       final List<dynamic> attachments,
       final Map<String, dynamic> metadata}) = _$OpenAIThreadMessageImpl;
 
@@ -359,9 +359,9 @@ abstract class _OpenAIThreadMessage implements OpenAIThreadMessage {
   @override
   List<dynamic> get content;
   @override
-  String get assistantId;
+  String? get assistantId;
   @override
-  String get runId;
+  String? get runId;
   @override
   List<dynamic> get attachments;
   @override

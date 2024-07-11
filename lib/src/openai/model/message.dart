@@ -1,3 +1,5 @@
+// ignore_for_file: invalid_annotation_target
+
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:llms/src/openai/model/tool_cell.dart';
 
@@ -8,6 +10,7 @@ part 'message.g.dart';
 class OpenAIMessage with _$OpenAIMessage {
   const OpenAIMessage._();
 
+  @JsonSerializable(includeIfNull: false)
   const factory OpenAIMessage({
     required String role,
     dynamic content,

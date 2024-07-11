@@ -11,7 +11,7 @@ class OpenAIThreadService {
   const OpenAIThreadService({required this.client});
 
   Future<OpenAIThread> createThread() async {
-    final response = await client.post('/v1/threads');
+    final response = await client.post('/threads');
     return response.one(OpenAIThread.fromJson);
   }
 
@@ -19,21 +19,24 @@ class OpenAIThreadService {
     String threadId,
     OpenAIMessage content,
   ) async {
+    print(content.toJson());
+    print("");
+
     final response = await client.post(
-      '/v1/threads/$threadId/messages',
+      '/threads/$threadId/messages',
       body: content.toJson(),
     );
     return response.one(OpenAIThreadMessage.fromJson);
   }
 
   Future<List<OpenAIThreadMessage>> listMessages(String threadId) async {
-    final response = await client.get('/v1/threads/$threadId/messages');
+    final response = await client.get('/threads/$threadId/messages');
     return response.many(OpenAIThreadMessage.fromJson);
   }
 
   Future<OpenAIThreadRun> createRun(
       {required String threadId, required String assistant_}) async {
-    final response = await client.post('/v1/threads/$threadId/runs');
+    final response = await client.post('/threads/$threadId/runs');
     return response.one(OpenAIThreadRun.fromJson);
   }
 }

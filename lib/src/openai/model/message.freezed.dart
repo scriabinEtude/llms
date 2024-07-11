@@ -117,7 +117,8 @@ class __$$OpenAIMessageImplCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
+
+@JsonSerializable(includeIfNull: false)
 class _$OpenAIMessageImpl extends _OpenAIMessage {
   const _$OpenAIMessageImpl(
       {required this.role, this.content, final List<OpenAIToolCell>? toolCalls})
