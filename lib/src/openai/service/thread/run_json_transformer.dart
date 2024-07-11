@@ -34,17 +34,34 @@ import 'dart:convert';
 //   }
 // }
 
-class RunJsonTransformer extends StreamTransformerBase<String, String> {
+class RunSplitTransformer extends StreamTransformerBase<String, String> {
+  List<String> buffer = [];
+
   @override
   Stream<String> bind(Stream<String> stream) {
     return stream.transform<String>(
       StreamTransformer.fromHandlers(
         handleData: (data, sink) {
-          print("");
-          print("=================================");
-          print(data);
+          // // 1차 시도
+          // print("=================================");
+          // print(data);
 
-          sink.add(data);
+          // // 2차 시도
+          // if (buffer.contains("event: done")) {
+          //   buffer.forEach((element) {
+          //     print("=================================");
+          //     print(element);
+          //   });
+          // }
+          // print("====================END");
+
+          buffer.addAll(LineSplitter.split(data));
+          if (buffer.contains("")) {
+            sink.add("${buffer[0]}\n${buffer.skip(1).join("")}");
+            print("=================================");
+            print("${buffer[0]}\n${buffer.skip(1).join("")}");
+            buffer.clear();
+          }
         },
       ),
     );

@@ -64,6 +64,6 @@ class OpenAIThreadService {
     return response.data!.stream
         .transform(Unit8Transformer())
         .transform(const Utf8Decoder())
-        .transform(RunJsonTransformer());
+        .transform(RunSplitTransformer());
   }
 }
