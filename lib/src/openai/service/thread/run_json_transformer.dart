@@ -68,6 +68,32 @@ class RunSplitTransformer
           print("======== BUFFER   END ========");
 
           if (buffer.contains("")) {
+            for (String e in buffer) {
+              if (e.startsWith("event: ")) {
+                print(e);
+              } else if (e.startsWith("data: ")) {
+                print(e);
+              }
+            }
+
+            // buffer.fold([], (prev, next) {
+            //   if (next.startsWith("event: ")) {
+            //     prev.add(next);
+            //   } else if (next.startsWith("data: ")) {}
+            // });
+
+            // while (buffer.contains("")) {
+            //   for (var i = 0; i < buffer.length; i++) {
+            //     if (buffer[i] == "") {
+            //       buffer.fold(initialValue, (previousValue, element) => null)
+            //     }
+            //   }
+            // }
+
+            for (var i = 0; i < buffer.length; i++) {
+              if (buffer[i] == "") {}
+            }
+
             // sink.add("${buffer[0]}\n${buffer.skip(1).join("")}");
             print("=================================");
             print("${buffer[0]}\n${buffer.skip(1).join("")}");
