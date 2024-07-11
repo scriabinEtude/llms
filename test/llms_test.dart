@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:llms/llms.dart';
@@ -11,7 +13,6 @@ import 'package:llms/src/openai/model/message.dart';
 import 'package:llms/src/openai/model/model.dart';
 import 'package:llms/src/openai/model/thread.dart';
 import 'package:llms/src/openai/model/thread_message.dart';
-import 'package:llms/src/openai/model/thread_run.dart';
 import 'package:llms/src/openai/model/tool.dart';
 
 import '../env.dart';
@@ -162,16 +163,24 @@ void main() {
   test('create thread, add a message and run', () async {
     final thread = await _client.thread.createThread();
     expect(thread, isA<OpenAIThread>());
-    final message = await _client.thread.createMessage(
+    await _client.thread.createMessage(
       thread.id,
       OpenAIMessage.user("hello"),
     );
-    final run = await _client.thread.createRun(
+    final run = await _client.thread.createRunStream(
       threadId: thread.id,
       assistant: openaiAssistantId,
     );
-    expect(run, isA<OpenAIThreadRun>());
-    print(message);
-    print(run);
+
+    expect(run, isA<Stream<dynamic>>());
+
+    final completer = Completer<bool>();
+    run.listen(
+      (e) {},
+      onDone: () {
+        completer.complete(true);
+      },
+    );
+    await completer.future;
   });
 }

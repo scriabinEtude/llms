@@ -25,33 +25,18 @@ class OpenAIClient {
             ),
           ]);
 
-  Future<Response<T>> get<T>(
-    String path, {
-    Options? options,
-  }) async {
-    return await _client.get<T>(
-      path,
-      options: options,
-    );
+  Future<Response<T>> get<T>(String path) async {
+    return await _client.get<T>(path);
   }
 
-  Future<Response<T>> post<T>(
-    String path, {
-    Map<String, dynamic>? body,
-    Options? options,
-  }) async {
-    return await _client.post<T>(
-      path,
-      data: body,
-      options: options,
-    );
+  Future<Response<T>> post<T>(String path, {Map<String, dynamic>? body}) async {
+    return await _client.post<T>(path, data: body);
   }
 
   Future<Response<T>> postFile<T>(
     String path, {
     String? filePath,
     Map<String, dynamic>? data,
-    Options? options,
   }) async {
     return await _client.post<T>(
       path,
@@ -59,7 +44,20 @@ class OpenAIClient {
         'file': await MultipartFile.fromFile(filePath!),
         ...?data,
       }),
-      options: options,
+    );
+  }
+
+  Future<Response<ResponseBody>> postStream<T>(
+    String path, {
+    Map<String, dynamic>? body,
+    Options? options,
+  }) async {
+    return await _client.post<ResponseBody>(
+      path,
+      data: body,
+      options: Options(
+        responseType: ResponseType.stream,
+      ),
     );
   }
 }
