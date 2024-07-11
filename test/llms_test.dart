@@ -176,7 +176,10 @@ void main() {
 
     final completer = Completer<bool>();
     run.listen(
-      (e) {},
+      (e) {
+        print("==========");
+        print(e);
+      },
       onDone: () {
         completer.complete(true);
       },

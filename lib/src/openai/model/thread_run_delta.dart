@@ -1,10 +1,11 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:llms/src/openai/model/thread_stream_object.dart';
 
 part 'thread_run_delta.freezed.dart';
 part 'thread_run_delta.g.dart';
 
 @freezed
-class OpenAIThreadRunDelta with _$OpenAIThreadRunDelta {
+class OpenAIThreadRunDelta with _$OpenAIThreadRunDelta, ThreadStreamObject {
   factory OpenAIThreadRunDelta({
     required String id,
     required String object,
