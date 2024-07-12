@@ -7,6 +7,7 @@ import 'package:llms/src/openai/model/thread.dart';
 import 'package:llms/src/openai/model/thread_message.dart';
 import 'package:llms/src/openai/model/thread_run.dart';
 import 'package:llms/src/openai/service/thread/run_json_transformer.dart';
+import 'package:llms/src/openai/util/transformer/event_split_transformer.dart';
 import 'package:llms/src/openai/util/transformer/unit8_transformer.dart';
 
 class OpenAIThreadService {
@@ -64,7 +65,7 @@ class OpenAIThreadService {
     return response.data!.stream
         .transform(Unit8Transformer())
         .transform(const Utf8Decoder())
-        .transform(RunSplitTransformer())
+        .transform(OpenAIEventSplitTransformer())
         .transform(RunTransformer());
   }
 }
