@@ -62,60 +62,30 @@ class RunSplitTransformer
           // print("====================END");
 
           // 3차 시도
+
+          // 2개로 나뉘어 전송되는 데이터가 있다.
+          // 한 번에 두개의 데이터가 오는 경우도 있다.
           buffer.addAll(LineSplitter.split(data));
-          print("======== BUFFER START ========");
-          print(buffer);
-          print("======== BUFFER   END ========");
 
           if (buffer.contains("")) {
+            String event = "";
+            String data = "";
             for (String e in buffer) {
               if (e.startsWith("event: ")) {
-                print(e);
+                event = e.replaceFirst("event: ", "");
               } else if (e.startsWith("data: ")) {
-                print(e);
+                data = e.replaceFirst("data: ", "");
+              } else if (e.isEmpty) {
+                sink.add(ThreadStreamData(event: event, data: data));
+                event = "";
+                data = "";
+              } else {
+                data += e;
               }
             }
 
-            // buffer.fold([], (prev, next) {
-            //   if (next.startsWith("event: ")) {
-            //     prev.add(next);
-            //   } else if (next.startsWith("data: ")) {}
-            // });
-
-            // while (buffer.contains("")) {
-            //   for (var i = 0; i < buffer.length; i++) {
-            //     if (buffer[i] == "") {
-            //       buffer.fold(initialValue, (previousValue, element) => null)
-            //     }
-            //   }
-            // }
-
-            for (var i = 0; i < buffer.length; i++) {
-              if (buffer[i] == "") {}
-            }
-
-            // sink.add("${buffer[0]}\n${buffer.skip(1).join("")}");
-            print("=================================");
-            print("${buffer[0]}\n${buffer.skip(1).join("")}");
             buffer.clear();
           }
-
-          // buffer.addAll(LineSplitter.split(data));
-          // if (buffer.contains("")) {
-          //   print(
-          //     ThreadStreamData(
-          //       event: buffer[0].replaceFirst("event: ", ""),
-          //       data: buffer.skip(1).join("").replaceFirst("data: ", ""),
-          //     ),
-          //   );
-          //   sink.add(
-          //     ThreadStreamData(
-          //       event: buffer[0].replaceFirst("event: ", ""),
-          //       data: buffer.skip(1).join("").replaceFirst("data: ", ""),
-          //     ),
-          //   );
-          //   buffer.clear();
-          // }
         },
       ),
     );
