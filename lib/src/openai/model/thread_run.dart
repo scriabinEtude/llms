@@ -1,5 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:llms/src/openai/model/thread_stream_object.dart';
+import 'package:llms/src/openai/model/tool.dart';
 import 'package:llms/src/openai/model/usage.dart';
 
 part 'thread_run.freezed.dart';
@@ -23,7 +24,7 @@ class OpenAIThreadRun with _$OpenAIThreadRun, ThreadStreamObject {
     String? lastError,
     required String model,
     String? instructions,
-    @Default([]) List<OpenAIThreadRunTool> tools,
+    @Default([]) List<OpenAITool> tools,
     @Default({}) Map<String, dynamic> metadata,
     String? incompleteDetails,
     OpenAIUsage? usage,
@@ -39,16 +40,6 @@ class OpenAIThreadRun with _$OpenAIThreadRun, ThreadStreamObject {
 
   factory OpenAIThreadRun.fromJson(Map<String, dynamic> json) =>
       _$OpenAIThreadRunFromJson(json);
-}
-
-@freezed
-class OpenAIThreadRunTool with _$OpenAIThreadRunTool {
-  factory OpenAIThreadRunTool({
-    required String type,
-  }) = _OpenAIThreadRunTool;
-
-  factory OpenAIThreadRunTool.fromJson(Map<String, dynamic> json) =>
-      _$OpenAIThreadRunToolFromJson(json);
 }
 
 @freezed

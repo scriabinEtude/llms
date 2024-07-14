@@ -21,7 +21,7 @@ OpenAITool _$OpenAIToolFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$OpenAITool {
   String get type => throw _privateConstructorUsedError;
-  OpenAIFunction get function => throw _privateConstructorUsedError;
+  OpenAIFunction? get function => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -35,9 +35,9 @@ abstract class $OpenAIToolCopyWith<$Res> {
           OpenAITool value, $Res Function(OpenAITool) then) =
       _$OpenAIToolCopyWithImpl<$Res, OpenAITool>;
   @useResult
-  $Res call({String type, OpenAIFunction function});
+  $Res call({String type, OpenAIFunction? function});
 
-  $OpenAIFunctionCopyWith<$Res> get function;
+  $OpenAIFunctionCopyWith<$Res>? get function;
 }
 
 /// @nodoc
@@ -54,24 +54,28 @@ class _$OpenAIToolCopyWithImpl<$Res, $Val extends OpenAITool>
   @override
   $Res call({
     Object? type = null,
-    Object? function = null,
+    Object? function = freezed,
   }) {
     return _then(_value.copyWith(
       type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as String,
-      function: null == function
+      function: freezed == function
           ? _value.function
           : function // ignore: cast_nullable_to_non_nullable
-              as OpenAIFunction,
+              as OpenAIFunction?,
     ) as $Val);
   }
 
   @override
   @pragma('vm:prefer-inline')
-  $OpenAIFunctionCopyWith<$Res> get function {
-    return $OpenAIFunctionCopyWith<$Res>(_value.function, (value) {
+  $OpenAIFunctionCopyWith<$Res>? get function {
+    if (_value.function == null) {
+      return null;
+    }
+
+    return $OpenAIFunctionCopyWith<$Res>(_value.function!, (value) {
       return _then(_value.copyWith(function: value) as $Val);
     });
   }
@@ -85,10 +89,10 @@ abstract class _$$OpenAIToolImplCopyWith<$Res>
       __$$OpenAIToolImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String type, OpenAIFunction function});
+  $Res call({String type, OpenAIFunction? function});
 
   @override
-  $OpenAIFunctionCopyWith<$Res> get function;
+  $OpenAIFunctionCopyWith<$Res>? get function;
 }
 
 /// @nodoc
@@ -103,17 +107,17 @@ class __$$OpenAIToolImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? type = null,
-    Object? function = null,
+    Object? function = freezed,
   }) {
     return _then(_$OpenAIToolImpl(
       type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as String,
-      function: null == function
+      function: freezed == function
           ? _value.function
           : function // ignore: cast_nullable_to_non_nullable
-              as OpenAIFunction,
+              as OpenAIFunction?,
     ));
   }
 }
@@ -121,8 +125,7 @@ class __$$OpenAIToolImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$OpenAIToolImpl extends _OpenAITool {
-  const _$OpenAIToolImpl({required this.type, required this.function})
-      : super._();
+  const _$OpenAIToolImpl({required this.type, this.function}) : super._();
 
   factory _$OpenAIToolImpl.fromJson(Map<String, dynamic> json) =>
       _$$OpenAIToolImplFromJson(json);
@@ -130,7 +133,7 @@ class _$OpenAIToolImpl extends _OpenAITool {
   @override
   final String type;
   @override
-  final OpenAIFunction function;
+  final OpenAIFunction? function;
 
   @override
   String toString() {
@@ -168,7 +171,7 @@ class _$OpenAIToolImpl extends _OpenAITool {
 abstract class _OpenAITool extends OpenAITool {
   const factory _OpenAITool(
       {required final String type,
-      required final OpenAIFunction function}) = _$OpenAIToolImpl;
+      final OpenAIFunction? function}) = _$OpenAIToolImpl;
   const _OpenAITool._() : super._();
 
   factory _OpenAITool.fromJson(Map<String, dynamic> json) =
@@ -177,7 +180,7 @@ abstract class _OpenAITool extends OpenAITool {
   @override
   String get type;
   @override
-  OpenAIFunction get function;
+  OpenAIFunction? get function;
   @override
   @JsonKey(ignore: true)
   _$$OpenAIToolImplCopyWith<_$OpenAIToolImpl> get copyWith =>

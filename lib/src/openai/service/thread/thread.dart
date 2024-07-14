@@ -6,6 +6,8 @@ import 'package:llms/src/openai/model/message.dart';
 import 'package:llms/src/openai/model/thread.dart';
 import 'package:llms/src/openai/model/thread_message.dart';
 import 'package:llms/src/openai/model/thread_run.dart';
+import 'package:llms/src/openai/model/thread_stream_object.dart';
+import 'package:llms/src/openai/model/tool.dart';
 import 'package:llms/src/openai/service/thread/run_json_transformer.dart';
 import 'package:llms/src/openai/util/transformer/event_split_transformer.dart';
 import 'package:llms/src/openai/util/transformer/unit8_transformer.dart';
@@ -49,10 +51,10 @@ class OpenAIThreadService {
     return response.one(OpenAIThreadRun.fromJson);
   }
 
-  Future<Stream<dynamic>> createRunStream({
+  Future<Stream<ThreadStreamObject>> createRunStream({
     required String threadId,
     required String assistant,
-    List<OpenAIThreadRunTool>? tools,
+    List<OpenAITool>? tools,
   }) async {
     final response = await client.postStream(
       '/threads/$threadId/runs',

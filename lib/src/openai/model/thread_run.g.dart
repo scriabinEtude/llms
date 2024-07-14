@@ -25,8 +25,7 @@ _$OpenAIThreadRunImpl _$$OpenAIThreadRunImplFromJson(
       model: json['model'] as String,
       instructions: json['instructions'] as String?,
       tools: (json['tools'] as List<dynamic>?)
-              ?.map((e) =>
-                  OpenAIThreadRunTool.fromJson(e as Map<String, dynamic>))
+              ?.map((e) => OpenAITool.fromJson(e as Map<String, dynamic>))
               .toList() ??
           const [],
       metadata: json['metadata'] as Map<String, dynamic>? ?? const {},
@@ -75,18 +74,6 @@ Map<String, dynamic> _$$OpenAIThreadRunImplToJson(
       'response_format': instance.responseFormat,
       'tool_choice': instance.toolChoice,
       'parallel_tool_calls': instance.parallelToolCalls,
-    };
-
-_$OpenAIThreadRunToolImpl _$$OpenAIThreadRunToolImplFromJson(
-        Map<String, dynamic> json) =>
-    _$OpenAIThreadRunToolImpl(
-      type: json['type'] as String,
-    );
-
-Map<String, dynamic> _$$OpenAIThreadRunToolImplToJson(
-        _$OpenAIThreadRunToolImpl instance) =>
-    <String, dynamic>{
-      'type': instance.type,
     };
 
 _$TruncationStrategyImpl _$$TruncationStrategyImplFromJson(

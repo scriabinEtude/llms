@@ -10,7 +10,7 @@ class OpenAITool with _$OpenAITool {
 
   const factory OpenAITool({
     required String type,
-    required OpenAIFunction function,
+    OpenAIFunction? function,
   }) = _OpenAITool;
 
   factory OpenAITool.fromJson(Map<String, dynamic> json) =>

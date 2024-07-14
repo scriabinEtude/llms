@@ -35,7 +35,7 @@ mixin _$OpenAIThreadRun {
   String? get lastError => throw _privateConstructorUsedError;
   String get model => throw _privateConstructorUsedError;
   String? get instructions => throw _privateConstructorUsedError;
-  List<OpenAIThreadRunTool> get tools => throw _privateConstructorUsedError;
+  List<OpenAITool> get tools => throw _privateConstructorUsedError;
   Map<String, dynamic> get metadata => throw _privateConstructorUsedError;
   String? get incompleteDetails => throw _privateConstructorUsedError;
   OpenAIUsage? get usage => throw _privateConstructorUsedError;
@@ -77,7 +77,7 @@ abstract class $OpenAIThreadRunCopyWith<$Res> {
       String? lastError,
       String model,
       String? instructions,
-      List<OpenAIThreadRunTool> tools,
+      List<OpenAITool> tools,
       Map<String, dynamic> metadata,
       String? incompleteDetails,
       OpenAIUsage? usage,
@@ -199,7 +199,7 @@ class _$OpenAIThreadRunCopyWithImpl<$Res, $Val extends OpenAIThreadRun>
       tools: null == tools
           ? _value.tools
           : tools // ignore: cast_nullable_to_non_nullable
-              as List<OpenAIThreadRunTool>,
+              as List<OpenAITool>,
       metadata: null == metadata
           ? _value.metadata
           : metadata // ignore: cast_nullable_to_non_nullable
@@ -293,7 +293,7 @@ abstract class _$$OpenAIThreadRunImplCopyWith<$Res>
       String? lastError,
       String model,
       String? instructions,
-      List<OpenAIThreadRunTool> tools,
+      List<OpenAITool> tools,
       Map<String, dynamic> metadata,
       String? incompleteDetails,
       OpenAIUsage? usage,
@@ -415,7 +415,7 @@ class __$$OpenAIThreadRunImplCopyWithImpl<$Res>
       tools: null == tools
           ? _value._tools
           : tools // ignore: cast_nullable_to_non_nullable
-              as List<OpenAIThreadRunTool>,
+              as List<OpenAITool>,
       metadata: null == metadata
           ? _value._metadata
           : metadata // ignore: cast_nullable_to_non_nullable
@@ -483,7 +483,7 @@ class _$OpenAIThreadRunImpl implements _OpenAIThreadRun {
       this.lastError,
       required this.model,
       this.instructions,
-      final List<OpenAIThreadRunTool> tools = const [],
+      final List<OpenAITool> tools = const [],
       final Map<String, dynamic> metadata = const {},
       this.incompleteDetails,
       this.usage,
@@ -531,10 +531,10 @@ class _$OpenAIThreadRunImpl implements _OpenAIThreadRun {
   final String model;
   @override
   final String? instructions;
-  final List<OpenAIThreadRunTool> _tools;
+  final List<OpenAITool> _tools;
   @override
   @JsonKey()
-  List<OpenAIThreadRunTool> get tools {
+  List<OpenAITool> get tools {
     if (_tools is EqualUnmodifiableListView) return _tools;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_tools);
@@ -693,7 +693,7 @@ abstract class _OpenAIThreadRun implements OpenAIThreadRun {
       final String? lastError,
       required final String model,
       final String? instructions,
-      final List<OpenAIThreadRunTool> tools,
+      final List<OpenAITool> tools,
       final Map<String, dynamic> metadata,
       final String? incompleteDetails,
       final OpenAIUsage? usage,
@@ -740,7 +740,7 @@ abstract class _OpenAIThreadRun implements OpenAIThreadRun {
   @override
   String? get instructions;
   @override
-  List<OpenAIThreadRunTool> get tools;
+  List<OpenAITool> get tools;
   @override
   Map<String, dynamic> get metadata;
   @override
@@ -766,144 +766,6 @@ abstract class _OpenAIThreadRun implements OpenAIThreadRun {
   @override
   @JsonKey(ignore: true)
   _$$OpenAIThreadRunImplCopyWith<_$OpenAIThreadRunImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-OpenAIThreadRunTool _$OpenAIThreadRunToolFromJson(Map<String, dynamic> json) {
-  return _OpenAIThreadRunTool.fromJson(json);
-}
-
-/// @nodoc
-mixin _$OpenAIThreadRunTool {
-  String get type => throw _privateConstructorUsedError;
-
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
-  $OpenAIThreadRunToolCopyWith<OpenAIThreadRunTool> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $OpenAIThreadRunToolCopyWith<$Res> {
-  factory $OpenAIThreadRunToolCopyWith(
-          OpenAIThreadRunTool value, $Res Function(OpenAIThreadRunTool) then) =
-      _$OpenAIThreadRunToolCopyWithImpl<$Res, OpenAIThreadRunTool>;
-  @useResult
-  $Res call({String type});
-}
-
-/// @nodoc
-class _$OpenAIThreadRunToolCopyWithImpl<$Res, $Val extends OpenAIThreadRunTool>
-    implements $OpenAIThreadRunToolCopyWith<$Res> {
-  _$OpenAIThreadRunToolCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? type = null,
-  }) {
-    return _then(_value.copyWith(
-      type: null == type
-          ? _value.type
-          : type // ignore: cast_nullable_to_non_nullable
-              as String,
-    ) as $Val);
-  }
-}
-
-/// @nodoc
-abstract class _$$OpenAIThreadRunToolImplCopyWith<$Res>
-    implements $OpenAIThreadRunToolCopyWith<$Res> {
-  factory _$$OpenAIThreadRunToolImplCopyWith(_$OpenAIThreadRunToolImpl value,
-          $Res Function(_$OpenAIThreadRunToolImpl) then) =
-      __$$OpenAIThreadRunToolImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({String type});
-}
-
-/// @nodoc
-class __$$OpenAIThreadRunToolImplCopyWithImpl<$Res>
-    extends _$OpenAIThreadRunToolCopyWithImpl<$Res, _$OpenAIThreadRunToolImpl>
-    implements _$$OpenAIThreadRunToolImplCopyWith<$Res> {
-  __$$OpenAIThreadRunToolImplCopyWithImpl(_$OpenAIThreadRunToolImpl _value,
-      $Res Function(_$OpenAIThreadRunToolImpl) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? type = null,
-  }) {
-    return _then(_$OpenAIThreadRunToolImpl(
-      type: null == type
-          ? _value.type
-          : type // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
-}
-
-/// @nodoc
-@JsonSerializable()
-class _$OpenAIThreadRunToolImpl implements _OpenAIThreadRunTool {
-  _$OpenAIThreadRunToolImpl({required this.type});
-
-  factory _$OpenAIThreadRunToolImpl.fromJson(Map<String, dynamic> json) =>
-      _$$OpenAIThreadRunToolImplFromJson(json);
-
-  @override
-  final String type;
-
-  @override
-  String toString() {
-    return 'OpenAIThreadRunTool(type: $type)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$OpenAIThreadRunToolImpl &&
-            (identical(other.type, type) || other.type == type));
-  }
-
-  @JsonKey(ignore: true)
-  @override
-  int get hashCode => Object.hash(runtimeType, type);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$OpenAIThreadRunToolImplCopyWith<_$OpenAIThreadRunToolImpl> get copyWith =>
-      __$$OpenAIThreadRunToolImplCopyWithImpl<_$OpenAIThreadRunToolImpl>(
-          this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$OpenAIThreadRunToolImplToJson(
-      this,
-    );
-  }
-}
-
-abstract class _OpenAIThreadRunTool implements OpenAIThreadRunTool {
-  factory _OpenAIThreadRunTool({required final String type}) =
-      _$OpenAIThreadRunToolImpl;
-
-  factory _OpenAIThreadRunTool.fromJson(Map<String, dynamic> json) =
-      _$OpenAIThreadRunToolImpl.fromJson;
-
-  @override
-  String get type;
-  @override
-  @JsonKey(ignore: true)
-  _$$OpenAIThreadRunToolImplCopyWith<_$OpenAIThreadRunToolImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 

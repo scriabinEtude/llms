@@ -32,6 +32,9 @@ class OpenAIEventSplitTransformer
           buffer.addAll(LineSplitter.split(data));
 
           if (buffer.contains("")) {
+            print("===============================");
+            print(buffer);
+
             String event = "";
             String data = "";
             for (String e in buffer) {

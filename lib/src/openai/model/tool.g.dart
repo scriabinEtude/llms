@@ -9,12 +9,13 @@ part of 'tool.dart';
 _$OpenAIToolImpl _$$OpenAIToolImplFromJson(Map<String, dynamic> json) =>
     _$OpenAIToolImpl(
       type: json['type'] as String,
-      function:
-          OpenAIFunction.fromJson(json['function'] as Map<String, dynamic>),
+      function: json['function'] == null
+          ? null
+          : OpenAIFunction.fromJson(json['function'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$OpenAIToolImplToJson(_$OpenAIToolImpl instance) =>
     <String, dynamic>{
       'type': instance.type,
-      'function': instance.function.toJson(),
+      'function': instance.function?.toJson(),
     };

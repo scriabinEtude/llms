@@ -13,6 +13,7 @@ import 'package:llms/src/openai/model/message.dart';
 import 'package:llms/src/openai/model/model.dart';
 import 'package:llms/src/openai/model/thread.dart';
 import 'package:llms/src/openai/model/thread_message.dart';
+import 'package:llms/src/openai/model/thread_stream_object.dart';
 import 'package:llms/src/openai/model/tool.dart';
 
 import '../env.dart';
@@ -184,6 +185,36 @@ void main() {
         completer.complete(true);
       },
     );
+    await completer.future;
+  });
+
+  test('create thread, add a message and run with Functions', () async {
+    final thread = await _client.thread.createThread();
+    expect(thread, isA<OpenAIThread>());
+    await _client.thread.createMessage(
+      thread.id,
+      OpenAIMessage.user("the future of science with an image"),
+    );
+    final run = await _client.thread.createRunStream(
+      threadId: thread.id,
+      assistant: openaiAssistantId,
+      tools: [
+        OpenAITool.function(function: OpenAIFunction.image()),
+      ],
+    );
+
+    expect(run, isA<Stream<ThreadStreamObject>>());
+
+    final completer = Completer<bool>();
+    run.listen((e) {
+      print("==========");
+      print(e);
+    }, onDone: () {
+      completer.complete(true);
+    }, onError: (e) {
+      print("===== ERROR =====");
+      print(e);
+    });
     await completer.future;
   });
 }
