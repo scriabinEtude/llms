@@ -14,6 +14,7 @@ import 'package:llms/src/openai/model/model.dart';
 import 'package:llms/src/openai/model/thread.dart';
 import 'package:llms/src/openai/model/thread_message.dart';
 import 'package:llms/src/openai/model/thread_run.dart';
+import 'package:llms/src/openai/model/thread_run_delta.dart';
 import 'package:llms/src/openai/model/thread_stream_object.dart';
 import 'package:llms/src/openai/model/tool.dart';
 
@@ -241,13 +242,20 @@ void main() {
 
     expect(run, isA<Stream<ThreadStreamObject>>());
     OpenAIThreadRun? requiresAction;
+    StringBuffer deltaBuffer = StringBuffer();
 
     run.listen((e) {
       if (e is OpenAIThreadRun && e.isRequiresAction) {
         requiresAction = e;
       }
+      if (e is OpenAIThreadRunDelta) {
+        deltaBuffer.write(e.delta);
+      }
     }, onDone: () {
       completer.complete(true);
+      print("======= RESULT MESSAGE ======");
+      print(deltaBuffer.toString());
+      deltaBuffer.clear();
     }, onError: (e) {
       print("===== ERROR =====");
       print(e);
@@ -267,13 +275,18 @@ void main() {
         threadId: thread.id,
         runId: requiresAction!.id,
         toolCallId: toolCell.id,
-        output: toolCell.function.result()["prompt"],
+        // output: toolCell.function.result()["prompt"],
+        output: "this is not a valid prompt",
       );
 
       toolOutputs.listen((event) {
-        print("==========");
-        print(event);
+        if (event is OpenAIThreadRunDelta) {
+          deltaBuffer.write(event.delta);
+        }
       }, onDone: () {
+        print("======= RESULT TOOL OUTPUTS ======");
+        print(deltaBuffer.toString());
+        deltaBuffer.clear();
         toolCompleter.complete(true);
       }, onError: (e) {
         print("===== ERROR =====");
