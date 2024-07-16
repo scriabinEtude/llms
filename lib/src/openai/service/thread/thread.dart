@@ -77,8 +77,13 @@ class OpenAIThreadService {
     required String toolCallId,
     required String output,
   }) async {
+    print('threadId: $threadId');
+    print('runId: $runId');
+    print('toolCallId: $toolCallId');
+    print('output: $output');
+
     final response = await client.postStream(
-      '/threads/$threadId/runs/$runId/tool_outputs',
+      '/threads/$threadId/runs/$runId/submit_tool_outputs',
       body: {
         "tool_outputs": [
           {
@@ -86,6 +91,7 @@ class OpenAIThreadService {
             "output": output,
           },
         ],
+        "stream": true,
       },
     );
     return response.data!.stream
