@@ -193,7 +193,7 @@ void main() {
     expect(thread, isA<OpenAIThread>());
     await _client.thread.createMessage(
       thread.id,
-      OpenAIMessage.user("the future of science with an image"),
+      OpenAIMessage.user("generate image sleeping cat"),
     );
     final run = await _client.thread.createRunStream(
       threadId: thread.id,

@@ -31,7 +31,8 @@ mixin _$OpenAIThreadRun {
   int? get cancelledAt => throw _privateConstructorUsedError;
   int? get failedAt => throw _privateConstructorUsedError;
   int? get completedAt => throw _privateConstructorUsedError;
-  String? get requiredAction => throw _privateConstructorUsedError;
+  OpenAIRequiredAction? get requiredAction =>
+      throw _privateConstructorUsedError;
   String? get lastError => throw _privateConstructorUsedError;
   String get model => throw _privateConstructorUsedError;
   String? get instructions => throw _privateConstructorUsedError;
@@ -73,7 +74,7 @@ abstract class $OpenAIThreadRunCopyWith<$Res> {
       int? cancelledAt,
       int? failedAt,
       int? completedAt,
-      String? requiredAction,
+      OpenAIRequiredAction? requiredAction,
       String? lastError,
       String model,
       String? instructions,
@@ -90,6 +91,7 @@ abstract class $OpenAIThreadRunCopyWith<$Res> {
       String toolChoice,
       bool parallelToolCalls});
 
+  $OpenAIRequiredActionCopyWith<$Res>? get requiredAction;
   $OpenAIUsageCopyWith<$Res>? get usage;
   $TruncationStrategyCopyWith<$Res> get truncationStrategy;
 }
@@ -183,7 +185,7 @@ class _$OpenAIThreadRunCopyWithImpl<$Res, $Val extends OpenAIThreadRun>
       requiredAction: freezed == requiredAction
           ? _value.requiredAction
           : requiredAction // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as OpenAIRequiredAction?,
       lastError: freezed == lastError
           ? _value.lastError
           : lastError // ignore: cast_nullable_to_non_nullable
@@ -249,6 +251,18 @@ class _$OpenAIThreadRunCopyWithImpl<$Res, $Val extends OpenAIThreadRun>
 
   @override
   @pragma('vm:prefer-inline')
+  $OpenAIRequiredActionCopyWith<$Res>? get requiredAction {
+    if (_value.requiredAction == null) {
+      return null;
+    }
+
+    return $OpenAIRequiredActionCopyWith<$Res>(_value.requiredAction!, (value) {
+      return _then(_value.copyWith(requiredAction: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
   $OpenAIUsageCopyWith<$Res>? get usage {
     if (_value.usage == null) {
       return null;
@@ -289,7 +303,7 @@ abstract class _$$OpenAIThreadRunImplCopyWith<$Res>
       int? cancelledAt,
       int? failedAt,
       int? completedAt,
-      String? requiredAction,
+      OpenAIRequiredAction? requiredAction,
       String? lastError,
       String model,
       String? instructions,
@@ -306,6 +320,8 @@ abstract class _$$OpenAIThreadRunImplCopyWith<$Res>
       String toolChoice,
       bool parallelToolCalls});
 
+  @override
+  $OpenAIRequiredActionCopyWith<$Res>? get requiredAction;
   @override
   $OpenAIUsageCopyWith<$Res>? get usage;
   @override
@@ -399,7 +415,7 @@ class __$$OpenAIThreadRunImplCopyWithImpl<$Res>
       requiredAction: freezed == requiredAction
           ? _value.requiredAction
           : requiredAction // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as OpenAIRequiredAction?,
       lastError: freezed == lastError
           ? _value.lastError
           : lastError // ignore: cast_nullable_to_non_nullable
@@ -524,7 +540,7 @@ class _$OpenAIThreadRunImpl implements _OpenAIThreadRun {
   @override
   final int? completedAt;
   @override
-  final String? requiredAction;
+  final OpenAIRequiredAction? requiredAction;
   @override
   final String? lastError;
   @override
@@ -689,7 +705,7 @@ abstract class _OpenAIThreadRun implements OpenAIThreadRun {
       final int? cancelledAt,
       final int? failedAt,
       final int? completedAt,
-      final String? requiredAction,
+      final OpenAIRequiredAction? requiredAction,
       final String? lastError,
       required final String model,
       final String? instructions,
@@ -732,7 +748,7 @@ abstract class _OpenAIThreadRun implements OpenAIThreadRun {
   @override
   int? get completedAt;
   @override
-  String? get requiredAction;
+  OpenAIRequiredAction? get requiredAction;
   @override
   String? get lastError;
   @override
@@ -924,4 +940,331 @@ abstract class _TruncationStrategy implements TruncationStrategy {
   @JsonKey(ignore: true)
   _$$TruncationStrategyImplCopyWith<_$TruncationStrategyImpl> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+OpenAIRequiredAction _$OpenAIRequiredActionFromJson(Map<String, dynamic> json) {
+  return _OpenAIRequiredAction.fromJson(json);
+}
+
+/// @nodoc
+mixin _$OpenAIRequiredAction {
+  String get type => throw _privateConstructorUsedError;
+  OpenAISubmitToolsOutput get submitToolOutputs =>
+      throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $OpenAIRequiredActionCopyWith<OpenAIRequiredAction> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $OpenAIRequiredActionCopyWith<$Res> {
+  factory $OpenAIRequiredActionCopyWith(OpenAIRequiredAction value,
+          $Res Function(OpenAIRequiredAction) then) =
+      _$OpenAIRequiredActionCopyWithImpl<$Res, OpenAIRequiredAction>;
+  @useResult
+  $Res call({String type, OpenAISubmitToolsOutput submitToolOutputs});
+
+  $OpenAISubmitToolsOutputCopyWith<$Res> get submitToolOutputs;
+}
+
+/// @nodoc
+class _$OpenAIRequiredActionCopyWithImpl<$Res,
+        $Val extends OpenAIRequiredAction>
+    implements $OpenAIRequiredActionCopyWith<$Res> {
+  _$OpenAIRequiredActionCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? type = null,
+    Object? submitToolOutputs = null,
+  }) {
+    return _then(_value.copyWith(
+      type: null == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as String,
+      submitToolOutputs: null == submitToolOutputs
+          ? _value.submitToolOutputs
+          : submitToolOutputs // ignore: cast_nullable_to_non_nullable
+              as OpenAISubmitToolsOutput,
+    ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $OpenAISubmitToolsOutputCopyWith<$Res> get submitToolOutputs {
+    return $OpenAISubmitToolsOutputCopyWith<$Res>(_value.submitToolOutputs,
+        (value) {
+      return _then(_value.copyWith(submitToolOutputs: value) as $Val);
+    });
+  }
+}
+
+/// @nodoc
+abstract class _$$OpenAIRequiredActionImplCopyWith<$Res>
+    implements $OpenAIRequiredActionCopyWith<$Res> {
+  factory _$$OpenAIRequiredActionImplCopyWith(_$OpenAIRequiredActionImpl value,
+          $Res Function(_$OpenAIRequiredActionImpl) then) =
+      __$$OpenAIRequiredActionImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({String type, OpenAISubmitToolsOutput submitToolOutputs});
+
+  @override
+  $OpenAISubmitToolsOutputCopyWith<$Res> get submitToolOutputs;
+}
+
+/// @nodoc
+class __$$OpenAIRequiredActionImplCopyWithImpl<$Res>
+    extends _$OpenAIRequiredActionCopyWithImpl<$Res, _$OpenAIRequiredActionImpl>
+    implements _$$OpenAIRequiredActionImplCopyWith<$Res> {
+  __$$OpenAIRequiredActionImplCopyWithImpl(_$OpenAIRequiredActionImpl _value,
+      $Res Function(_$OpenAIRequiredActionImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? type = null,
+    Object? submitToolOutputs = null,
+  }) {
+    return _then(_$OpenAIRequiredActionImpl(
+      type: null == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as String,
+      submitToolOutputs: null == submitToolOutputs
+          ? _value.submitToolOutputs
+          : submitToolOutputs // ignore: cast_nullable_to_non_nullable
+              as OpenAISubmitToolsOutput,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$OpenAIRequiredActionImpl implements _OpenAIRequiredAction {
+  _$OpenAIRequiredActionImpl(
+      {required this.type, required this.submitToolOutputs});
+
+  factory _$OpenAIRequiredActionImpl.fromJson(Map<String, dynamic> json) =>
+      _$$OpenAIRequiredActionImplFromJson(json);
+
+  @override
+  final String type;
+  @override
+  final OpenAISubmitToolsOutput submitToolOutputs;
+
+  @override
+  String toString() {
+    return 'OpenAIRequiredAction(type: $type, submitToolOutputs: $submitToolOutputs)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$OpenAIRequiredActionImpl &&
+            (identical(other.type, type) || other.type == type) &&
+            (identical(other.submitToolOutputs, submitToolOutputs) ||
+                other.submitToolOutputs == submitToolOutputs));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(runtimeType, type, submitToolOutputs);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$OpenAIRequiredActionImplCopyWith<_$OpenAIRequiredActionImpl>
+      get copyWith =>
+          __$$OpenAIRequiredActionImplCopyWithImpl<_$OpenAIRequiredActionImpl>(
+              this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$OpenAIRequiredActionImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _OpenAIRequiredAction implements OpenAIRequiredAction {
+  factory _OpenAIRequiredAction(
+          {required final String type,
+          required final OpenAISubmitToolsOutput submitToolOutputs}) =
+      _$OpenAIRequiredActionImpl;
+
+  factory _OpenAIRequiredAction.fromJson(Map<String, dynamic> json) =
+      _$OpenAIRequiredActionImpl.fromJson;
+
+  @override
+  String get type;
+  @override
+  OpenAISubmitToolsOutput get submitToolOutputs;
+  @override
+  @JsonKey(ignore: true)
+  _$$OpenAIRequiredActionImplCopyWith<_$OpenAIRequiredActionImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+OpenAISubmitToolsOutput _$OpenAISubmitToolsOutputFromJson(
+    Map<String, dynamic> json) {
+  return _OpenAISubmitToolsOutput.fromJson(json);
+}
+
+/// @nodoc
+mixin _$OpenAISubmitToolsOutput {
+  List<OpenAIToolCell> get toolCalls => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $OpenAISubmitToolsOutputCopyWith<OpenAISubmitToolsOutput> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $OpenAISubmitToolsOutputCopyWith<$Res> {
+  factory $OpenAISubmitToolsOutputCopyWith(OpenAISubmitToolsOutput value,
+          $Res Function(OpenAISubmitToolsOutput) then) =
+      _$OpenAISubmitToolsOutputCopyWithImpl<$Res, OpenAISubmitToolsOutput>;
+  @useResult
+  $Res call({List<OpenAIToolCell> toolCalls});
+}
+
+/// @nodoc
+class _$OpenAISubmitToolsOutputCopyWithImpl<$Res,
+        $Val extends OpenAISubmitToolsOutput>
+    implements $OpenAISubmitToolsOutputCopyWith<$Res> {
+  _$OpenAISubmitToolsOutputCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? toolCalls = null,
+  }) {
+    return _then(_value.copyWith(
+      toolCalls: null == toolCalls
+          ? _value.toolCalls
+          : toolCalls // ignore: cast_nullable_to_non_nullable
+              as List<OpenAIToolCell>,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$OpenAISubmitToolsOutputImplCopyWith<$Res>
+    implements $OpenAISubmitToolsOutputCopyWith<$Res> {
+  factory _$$OpenAISubmitToolsOutputImplCopyWith(
+          _$OpenAISubmitToolsOutputImpl value,
+          $Res Function(_$OpenAISubmitToolsOutputImpl) then) =
+      __$$OpenAISubmitToolsOutputImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({List<OpenAIToolCell> toolCalls});
+}
+
+/// @nodoc
+class __$$OpenAISubmitToolsOutputImplCopyWithImpl<$Res>
+    extends _$OpenAISubmitToolsOutputCopyWithImpl<$Res,
+        _$OpenAISubmitToolsOutputImpl>
+    implements _$$OpenAISubmitToolsOutputImplCopyWith<$Res> {
+  __$$OpenAISubmitToolsOutputImplCopyWithImpl(
+      _$OpenAISubmitToolsOutputImpl _value,
+      $Res Function(_$OpenAISubmitToolsOutputImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? toolCalls = null,
+  }) {
+    return _then(_$OpenAISubmitToolsOutputImpl(
+      toolCalls: null == toolCalls
+          ? _value._toolCalls
+          : toolCalls // ignore: cast_nullable_to_non_nullable
+              as List<OpenAIToolCell>,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$OpenAISubmitToolsOutputImpl implements _OpenAISubmitToolsOutput {
+  _$OpenAISubmitToolsOutputImpl({required final List<OpenAIToolCell> toolCalls})
+      : _toolCalls = toolCalls;
+
+  factory _$OpenAISubmitToolsOutputImpl.fromJson(Map<String, dynamic> json) =>
+      _$$OpenAISubmitToolsOutputImplFromJson(json);
+
+  final List<OpenAIToolCell> _toolCalls;
+  @override
+  List<OpenAIToolCell> get toolCalls {
+    if (_toolCalls is EqualUnmodifiableListView) return _toolCalls;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_toolCalls);
+  }
+
+  @override
+  String toString() {
+    return 'OpenAISubmitToolsOutput(toolCalls: $toolCalls)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$OpenAISubmitToolsOutputImpl &&
+            const DeepCollectionEquality()
+                .equals(other._toolCalls, _toolCalls));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(_toolCalls));
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$OpenAISubmitToolsOutputImplCopyWith<_$OpenAISubmitToolsOutputImpl>
+      get copyWith => __$$OpenAISubmitToolsOutputImplCopyWithImpl<
+          _$OpenAISubmitToolsOutputImpl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$OpenAISubmitToolsOutputImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _OpenAISubmitToolsOutput implements OpenAISubmitToolsOutput {
+  factory _OpenAISubmitToolsOutput(
+          {required final List<OpenAIToolCell> toolCalls}) =
+      _$OpenAISubmitToolsOutputImpl;
+
+  factory _OpenAISubmitToolsOutput.fromJson(Map<String, dynamic> json) =
+      _$OpenAISubmitToolsOutputImpl.fromJson;
+
+  @override
+  List<OpenAIToolCell> get toolCalls;
+  @override
+  @JsonKey(ignore: true)
+  _$$OpenAISubmitToolsOutputImplCopyWith<_$OpenAISubmitToolsOutputImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }

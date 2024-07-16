@@ -48,7 +48,8 @@ class RunTransformer
         handleData: (data, sink) {
           if (data.event == "thread.message.delta") {
             sink.add(OpenAIThreadRunDelta.fromJson(jsonDecode(data.data)));
-          } else if (data.event == "thread.run.completed") {
+          } else if (data.event == "thread.run.completed" ||
+              data.event == "thread.run.requires_action") {
             sink.add(OpenAIThreadRun.fromJson(jsonDecode(data.data)));
           }
         },

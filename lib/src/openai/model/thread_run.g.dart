@@ -20,7 +20,10 @@ _$OpenAIThreadRunImpl _$$OpenAIThreadRunImplFromJson(
       cancelledAt: (json['cancelled_at'] as num?)?.toInt(),
       failedAt: (json['failed_at'] as num?)?.toInt(),
       completedAt: (json['completed_at'] as num?)?.toInt(),
-      requiredAction: json['required_action'] as String?,
+      requiredAction: json['required_action'] == null
+          ? null
+          : OpenAIRequiredAction.fromJson(
+              json['required_action'] as Map<String, dynamic>),
       lastError: json['last_error'] as String?,
       model: json['model'] as String,
       instructions: json['instructions'] as String?,
@@ -58,7 +61,7 @@ Map<String, dynamic> _$$OpenAIThreadRunImplToJson(
       'cancelled_at': instance.cancelledAt,
       'failed_at': instance.failedAt,
       'completed_at': instance.completedAt,
-      'required_action': instance.requiredAction,
+      'required_action': instance.requiredAction?.toJson(),
       'last_error': instance.lastError,
       'model': instance.model,
       'instructions': instance.instructions,
@@ -88,4 +91,33 @@ Map<String, dynamic> _$$TruncationStrategyImplToJson(
     <String, dynamic>{
       'type': instance.type,
       'last_messages': instance.lastMessages,
+    };
+
+_$OpenAIRequiredActionImpl _$$OpenAIRequiredActionImplFromJson(
+        Map<String, dynamic> json) =>
+    _$OpenAIRequiredActionImpl(
+      type: json['type'] as String,
+      submitToolOutputs: OpenAISubmitToolsOutput.fromJson(
+          json['submit_tool_outputs'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$$OpenAIRequiredActionImplToJson(
+        _$OpenAIRequiredActionImpl instance) =>
+    <String, dynamic>{
+      'type': instance.type,
+      'submit_tool_outputs': instance.submitToolOutputs.toJson(),
+    };
+
+_$OpenAISubmitToolsOutputImpl _$$OpenAISubmitToolsOutputImplFromJson(
+        Map<String, dynamic> json) =>
+    _$OpenAISubmitToolsOutputImpl(
+      toolCalls: (json['tool_calls'] as List<dynamic>)
+          .map((e) => OpenAIToolCell.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    );
+
+Map<String, dynamic> _$$OpenAISubmitToolsOutputImplToJson(
+        _$OpenAISubmitToolsOutputImpl instance) =>
+    <String, dynamic>{
+      'tool_calls': instance.toolCalls.map((e) => e.toJson()).toList(),
     };

@@ -1,6 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:llms/src/openai/model/thread_stream_object.dart';
 import 'package:llms/src/openai/model/tool.dart';
+import 'package:llms/src/openai/model/tool_cell.dart';
 import 'package:llms/src/openai/model/usage.dart';
 
 part 'thread_run.freezed.dart';
@@ -20,7 +21,7 @@ class OpenAIThreadRun with _$OpenAIThreadRun, ThreadStreamObject {
     int? cancelledAt,
     int? failedAt,
     int? completedAt,
-    String? requiredAction,
+    OpenAIRequiredAction? requiredAction,
     String? lastError,
     required String model,
     String? instructions,
@@ -51,4 +52,25 @@ class TruncationStrategy with _$TruncationStrategy {
 
   factory TruncationStrategy.fromJson(Map<String, dynamic> json) =>
       _$TruncationStrategyFromJson(json);
+}
+
+@freezed
+class OpenAIRequiredAction with _$OpenAIRequiredAction {
+  factory OpenAIRequiredAction({
+    required String type,
+    required OpenAISubmitToolsOutput submitToolOutputs,
+  }) = _OpenAIRequiredAction;
+
+  factory OpenAIRequiredAction.fromJson(Map<String, dynamic> json) =>
+      _$OpenAIRequiredActionFromJson(json);
+}
+
+@freezed
+class OpenAISubmitToolsOutput with _$OpenAISubmitToolsOutput {
+  factory OpenAISubmitToolsOutput({
+    required List<OpenAIToolCell> toolCalls,
+  }) = _OpenAISubmitToolsOutput;
+
+  factory OpenAISubmitToolsOutput.fromJson(Map<String, dynamic> json) =>
+      _$OpenAISubmitToolsOutputFromJson(json);
 }
