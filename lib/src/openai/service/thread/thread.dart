@@ -70,4 +70,28 @@ class OpenAIThreadService {
         .transform(OpenAIEventSplitTransformer())
         .transform(RunTransformer());
   }
+
+  Future<Stream<ThreadStreamObject>> submitToolOutputsToRun({
+    required String threadId,
+    required String runId,
+    required String toolCallId,
+    required String output,
+  }) async {
+    final response = await client.postStream(
+      '/threads/$threadId/runs/$runId/tool_outputs',
+      body: {
+        "tool_outputs": [
+          {
+            "tool_call_id": toolCallId,
+            "output": output,
+          },
+        ],
+      },
+    );
+    return response.data!.stream
+        .transform(Unit8Transformer())
+        .transform(const Utf8Decoder())
+        .transform(OpenAIEventSplitTransformer())
+        .transform(RunTransformer());
+  }
 }

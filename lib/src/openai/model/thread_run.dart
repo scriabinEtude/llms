@@ -9,6 +9,8 @@ part 'thread_run.g.dart';
 
 @freezed
 class OpenAIThreadRun with _$OpenAIThreadRun, ThreadStreamObject {
+  const OpenAIThreadRun._();
+
   factory OpenAIThreadRun({
     required String id,
     required String object,
@@ -41,6 +43,8 @@ class OpenAIThreadRun with _$OpenAIThreadRun, ThreadStreamObject {
 
   factory OpenAIThreadRun.fromJson(Map<String, dynamic> json) =>
       _$OpenAIThreadRunFromJson(json);
+
+  bool get isRequiresAction => status == "requires_action";
 }
 
 @freezed

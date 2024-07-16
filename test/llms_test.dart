@@ -13,6 +13,7 @@ import 'package:llms/src/openai/model/message.dart';
 import 'package:llms/src/openai/model/model.dart';
 import 'package:llms/src/openai/model/thread.dart';
 import 'package:llms/src/openai/model/thread_message.dart';
+import 'package:llms/src/openai/model/thread_run.dart';
 import 'package:llms/src/openai/model/thread_stream_object.dart';
 import 'package:llms/src/openai/model/tool.dart';
 
@@ -216,5 +217,70 @@ void main() {
       print(e);
     });
     await completer.future;
+  });
+
+  test(
+      'create thread, add a message and run with Functions And Requires Functions',
+      () async {
+    final thread = await _client.thread.createThread();
+    expect(thread, isA<OpenAIThread>());
+    await _client.thread.createMessage(
+      thread.id,
+      OpenAIMessage.user("generate image sleeping cat"),
+    );
+
+    final completer = Completer<bool>();
+
+    final run = await _client.thread.createRunStream(
+      threadId: thread.id,
+      assistant: openaiAssistantId,
+      tools: [
+        OpenAITool.function(function: OpenAIFunction.image()),
+      ],
+    );
+
+    expect(run, isA<Stream<ThreadStreamObject>>());
+    OpenAIThreadRun? requiresAction;
+
+    run.listen((e) {
+      if (e is OpenAIThreadRun && e.isRequiresAction) {
+        requiresAction = e;
+      }
+    }, onDone: () {
+      completer.complete(true);
+    }, onError: (e) {
+      print("===== ERROR =====");
+      print(e);
+    });
+
+    await completer.future;
+
+    print("+++++ requiresAction ++++++ : ${requiresAction != null}");
+
+    final toolCompleter = Completer<bool>();
+
+    if (requiresAction != null) {
+      final toolCell =
+          requiresAction!.requiredAction!.submitToolOutputs.toolCalls[0];
+
+      final toolOutputs = await _client.thread.submitToolOutputsToRun(
+        threadId: thread.id,
+        runId: requiresAction!.id,
+        toolCallId: toolCell.id,
+        output: toolCell.function.result()["prompt"],
+      );
+
+      toolOutputs.listen((event) {
+        print("==========");
+        print(event);
+      }, onDone: () {
+        toolCompleter.complete(true);
+      }, onError: (e) {
+        print("===== ERROR =====");
+        print(e);
+      });
+    }
+
+    await toolCompleter.future;
   });
 }

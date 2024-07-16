@@ -482,7 +482,7 @@ class __$$OpenAIThreadRunImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$OpenAIThreadRunImpl implements _OpenAIThreadRun {
+class _$OpenAIThreadRunImpl extends _OpenAIThreadRun {
   _$OpenAIThreadRunImpl(
       {required this.id,
       required this.object,
@@ -512,7 +512,8 @@ class _$OpenAIThreadRunImpl implements _OpenAIThreadRun {
       required this.toolChoice,
       required this.parallelToolCalls})
       : _tools = tools,
-        _metadata = metadata;
+        _metadata = metadata,
+        super._();
 
   factory _$OpenAIThreadRunImpl.fromJson(Map<String, dynamic> json) =>
       _$$OpenAIThreadRunImplFromJson(json);
@@ -692,7 +693,7 @@ class _$OpenAIThreadRunImpl implements _OpenAIThreadRun {
   }
 }
 
-abstract class _OpenAIThreadRun implements OpenAIThreadRun {
+abstract class _OpenAIThreadRun extends OpenAIThreadRun {
   factory _OpenAIThreadRun(
       {required final String id,
       required final String object,
@@ -721,6 +722,7 @@ abstract class _OpenAIThreadRun implements OpenAIThreadRun {
       required final String responseFormat,
       required final String toolChoice,
       required final bool parallelToolCalls}) = _$OpenAIThreadRunImpl;
+  _OpenAIThreadRun._() : super._();
 
   factory _OpenAIThreadRun.fromJson(Map<String, dynamic> json) =
       _$OpenAIThreadRunImpl.fromJson;
