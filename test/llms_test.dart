@@ -168,7 +168,7 @@ void main() {
     expect(thread, isA<OpenAIThread>());
     await _client.thread.createMessage(
       thread.id,
-      OpenAIMessage.user("hello"),
+      OpenAIMessage.user("make sound of counting number"),
     );
     final run = await _client.thread.createRunStream(
       threadId: thread.id,
@@ -195,7 +195,7 @@ void main() {
     expect(thread, isA<OpenAIThread>());
     await _client.thread.createMessage(
       thread.id,
-      OpenAIMessage.user("generate image sleeping cat"),
+      OpenAIMessage.user("make sound of counting number"),
     );
     final run = await _client.thread.createRunStream(
       threadId: thread.id,
@@ -271,12 +271,95 @@ void main() {
       final toolCell =
           requiresAction!.requiredAction!.submitToolOutputs.toolCalls[0];
 
+      /// 내 함수를 콜링하고 그 결과값을 넣는것.
+      /// 내 함수는 OpenAI Vision이 될 수 있다.
       final toolOutputs = await _client.thread.submitToolOutputsToRun(
         threadId: thread.id,
         runId: requiresAction!.id,
         toolCallId: toolCell.id,
         // output: toolCell.function.result()["prompt"],
-        output: "this is not a valid prompt",
+        output:
+            "good job! it's done. the result image is 'https://as2.ftcdn.net/v2/jpg/03/16/68/69/1000_F_316686992_OvCTP1wfazJhBeMrBBDUGooufSmj2O8G.jpg'",
+      );
+
+      toolOutputs.listen((event) {
+        if (event is OpenAIThreadRunDelta) {
+          deltaBuffer.write(event.delta);
+        }
+      }, onDone: () {
+        print("======= RESULT TOOL OUTPUTS ======");
+        print(deltaBuffer.toString());
+        deltaBuffer.clear();
+        toolCompleter.complete(true);
+      }, onError: (e) {
+        print("===== ERROR =====");
+        print(e);
+      });
+    }
+
+    await toolCompleter.future;
+  });
+
+  test(
+      'create thread, add a message and run with Functions And Create an Image',
+      () async {
+    final thread = await _client.thread.createThread();
+    expect(thread, isA<OpenAIThread>());
+    await _client.thread.createMessage(
+      thread.id,
+      OpenAIMessage.user("generate image sleeping cat"),
+    );
+
+    final completer = Completer<bool>();
+
+    final run = await _client.thread.createRunStream(
+      threadId: thread.id,
+      assistant: openaiAssistantId,
+      tools: [
+        OpenAITool.function(function: OpenAIFunction.image()),
+      ],
+    );
+
+    expect(run, isA<Stream<ThreadStreamObject>>());
+    OpenAIThreadRun? requiresAction;
+    StringBuffer deltaBuffer = StringBuffer();
+
+    run.listen((e) {
+      if (e is OpenAIThreadRun && e.isRequiresAction) {
+        requiresAction = e;
+      }
+      if (e is OpenAIThreadRunDelta) {
+        deltaBuffer.write(e.delta);
+      }
+    }, onDone: () {
+      completer.complete(true);
+      print("======= RESULT MESSAGE ======");
+      print(deltaBuffer.toString());
+      deltaBuffer.clear();
+    }, onError: (e) {
+      print("===== ERROR =====");
+      print(e);
+    });
+
+    await completer.future;
+
+    print("+++++ requiresAction ++++++ : ${requiresAction != null}");
+
+    final toolCompleter = Completer<bool>();
+
+    if (requiresAction != null) {
+      final toolCell =
+          requiresAction!.requiredAction!.submitToolOutputs.toolCalls[0];
+
+      /// 내 함수를 콜링하고 그 결과값을 넣는것.
+      /// 내 함수는 OpenAI Vision이 될 수 있다.
+      final toolOutputs = await _client.thread.submitToolOutputsToRun(
+        threadId: thread.id,
+        runId: requiresAction!.id,
+        toolCallId: toolCell.id,
+        // output: toolCell.function.result()["prompt"],
+        output:
+            "good job! it's done. the result image is 'https://as2.ftcdn.net/v2/jpg/03/16/68/69/1000_F_316686992_OvCTP1wfazJhBeMrBBDUGooufSmj2O8G.jpg'",
       );
 
       toolOutputs.listen((event) {
