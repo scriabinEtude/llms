@@ -351,20 +351,25 @@ void main() {
       final toolCell =
           requiresAction!.requiredAction!.submitToolOutputs.toolCalls[0];
 
+      // 함수에서 나온 Prompt로 이미지 생성
+      final imageResponse = await _client.image.createImage(
+        model: OpenAIModelType.dall_e_3,
+        prompt: toolCell.function.result()["prompt"],
+      );
+
       /// 내 함수를 콜링하고 그 결과값을 넣는것.
       /// 내 함수는 OpenAI Vision이 될 수 있다.
       final toolOutputs = await _client.thread.submitToolOutputsToRun(
         threadId: thread.id,
         runId: requiresAction!.id,
         toolCallId: toolCell.id,
-        // output: toolCell.function.result()["prompt"],
         output:
-            "good job! it's done. the result image is 'https://as2.ftcdn.net/v2/jpg/03/16/68/69/1000_F_316686992_OvCTP1wfazJhBeMrBBDUGooufSmj2O8G.jpg'",
+            "good job! it's done. the result image is '${imageResponse.first.url}'",
       );
 
       toolOutputs.listen((event) {
         if (event is OpenAIThreadRunDelta) {
-          deltaBuffer.write(event.delta);
+          deltaBuffer.write(event.delta.content.first.text.value);
         }
       }, onDone: () {
         print("======= RESULT TOOL OUTPUTS ======");
