@@ -50,13 +50,25 @@ class OpenAIClient {
   Future<Response<ResponseBody>> postStream<T>(
     String path, {
     Map<String, dynamic>? body,
-    Options? options,
   }) async {
     return await _client.post<ResponseBody>(
       path,
       data: body,
       options: Options(
         responseType: ResponseType.stream,
+      ),
+    );
+  }
+
+  Future<Response<T>> postBytesResponse<T>(
+    String path, {
+    Map<String, dynamic>? body,
+  }) async {
+    return await _client.post<T>(
+      path,
+      data: body,
+      options: Options(
+        responseType: ResponseType.bytes,
       ),
     );
   }

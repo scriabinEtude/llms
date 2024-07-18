@@ -1,4 +1,5 @@
 import 'package:llms/src/client/client.dart';
+import 'package:llms/src/openai/service/audio/audio.dart';
 import 'package:llms/src/openai/service/chat/chat.dart';
 import 'package:llms/src/openai/service/file/file.dart';
 import 'package:llms/src/openai/service/image/image.dart';
@@ -11,6 +12,7 @@ class OpenAI {
   final OpenAIImageService image;
   final OpenAIFileService file;
   final OpenAIThreadService thread;
+  final OpenAIAudioService audio;
 
   OpenAI({
     required OpenAIClient client,
@@ -18,5 +20,6 @@ class OpenAI {
         chat = OpenAIChatService(client: client),
         image = OpenAIImageService(client: client),
         file = OpenAIFileService(client: client),
-        thread = OpenAIThreadService(client: client);
+        thread = OpenAIThreadService(client: client),
+        audio = OpenAIAudioService(client: client);
 }

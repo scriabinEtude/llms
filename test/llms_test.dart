@@ -1,10 +1,12 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:llms/llms.dart';
 import 'package:llms/src/openai/enum/file.dart';
 import 'package:llms/src/openai/enum/model.dart';
+import 'package:llms/src/openai/enum/voice.dart';
 import 'package:llms/src/openai/model/chat_completion.dart';
 import 'package:llms/src/openai/model/file.dart';
 import 'package:llms/src/openai/model/function.dart';
@@ -383,5 +385,27 @@ void main() {
     }
 
     await toolCompleter.future;
+  });
+
+  test('file test', () async {
+    final file = File("downloads/test.txt");
+    print(file.absolute);
+    print(file.existsSync());
+    print(file.readAsStringSync());
+    print(file.parent.path);
+    print(file.path);
+  });
+
+  test('create speech', () async {
+    final bytes = await _client.audio.createSpeech(
+      model: OpenAIModelType.tts_1,
+      input: "안녕하세요!",
+      voice: OpenAIVoiceType.alloy,
+    );
+
+    File file = File("downloads/audio.mp3");
+    var raf = file.openSync(mode: FileMode.writeOnly);
+    raf.writeFromSync(bytes);
+    await raf.close();
   });
 }
