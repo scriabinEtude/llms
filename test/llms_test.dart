@@ -5,6 +5,7 @@ import 'package:flutter_test/flutter_test.dart';
 
 import 'package:llms/llms.dart';
 import 'package:llms/src/openai/enum/file.dart';
+import 'package:llms/src/openai/enum/language.dart';
 import 'package:llms/src/openai/enum/model.dart';
 import 'package:llms/src/openai/enum/voice.dart';
 import 'package:llms/src/openai/model/chat_completion.dart';
@@ -399,7 +400,7 @@ void main() {
   test('create speech', () async {
     final bytes = await _client.audio.createSpeech(
       model: OpenAIModelType.tts_1,
-      input: "안녕하세요!",
+      input: "하루에 3시간을 걸으면 7년 후에 지구를 한바퀴 돌 수 있다.",
       voice: OpenAIVoiceType.alloy,
     );
 
@@ -407,5 +408,24 @@ void main() {
     var raf = file.openSync(mode: FileMode.writeOnly);
     raf.writeFromSync(bytes);
     await raf.close();
+  });
+
+  test('create transcriptions', () async {
+    final result = await _client.audio.createTranscriptions(
+      model: OpenAIModelType.whisper_1,
+      filePath: "downloads/audio.mp3",
+      language: OpenAILanguageType.korean,
+    );
+
+    print(result);
+  });
+
+  test('create Translation', () async {
+    final result = await _client.audio.createTranslation(
+      model: OpenAIModelType.whisper_1,
+      filePath: "downloads/audio.mp3",
+    );
+
+    print(result);
   });
 }

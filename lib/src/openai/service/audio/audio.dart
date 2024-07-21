@@ -25,7 +25,7 @@ class OpenAIAudioService {
     return response.data;
   }
 
-  Future<void> createTranscriptions({
+  Future<String> createTranscriptions({
     required OpenAIModelType model,
     required String filePath,
     required OpenAILanguageType language,
@@ -39,10 +39,10 @@ class OpenAIAudioService {
       },
     );
 
-    print(response.data);
+    return response.data['text'];
   }
 
-  Future<void> createTranslation({
+  Future<String> createTranslation({
     required OpenAIModelType model,
     required String filePath,
   }) async {
@@ -54,6 +54,6 @@ class OpenAIAudioService {
       },
     );
 
-    print(response.data);
+    return response.data['text'];
   }
 }
