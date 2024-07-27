@@ -1,6 +1,8 @@
 // ignore_for_file: constant_identifier_names
 
 enum OpenAIModelType {
+  gpt_4o_mini("gpt-4o-mini"),
+  gpt_4o_mini_2024_07_08("gpt-4o-mini-2024-07-08"),
   gpt_4o_2024_05_13("gpt-4o-2024-05-13"),
   gpt_4o("gpt-4o"),
   gpt_4_turbo_2024_04_09("gpt-4-turbo-2024-04-09"),

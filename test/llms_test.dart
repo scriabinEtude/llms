@@ -44,7 +44,7 @@ void main() {
 
   test('chat completion default', () async {
     final chatCompletion = await _client.chat.chatCompletion(
-      model: OpenAIModelType.gpt_4o_2024_05_13,
+      model: OpenAIModelType.gpt_4o_mini,
       messages: [
         OpenAIMessage.system("You are a helpful assistant."),
         OpenAIMessage.user("챗 지피티가 뭐야? 이 것으로 어떤 서비스를 만들 수 있을까?"),
@@ -56,7 +56,7 @@ void main() {
 
   test("chat completion tools for image", () async {
     final chatCompletion = await _client.chat.chatCompletion(
-      model: OpenAIModelType.gpt_4o_2024_05_13,
+      model: OpenAIModelType.gpt_4o_mini,
       messages: [
         OpenAIMessage.system("You are a helpful assistant."),
         OpenAIMessage.user("generate image of cat"),
@@ -71,7 +71,7 @@ void main() {
 
   test("chat completion tools but not use", () async {
     final chatCompletion = await _client.chat.chatCompletion(
-      model: OpenAIModelType.gpt_4o_2024_05_13,
+      model: OpenAIModelType.gpt_4o_mini,
       messages: [
         OpenAIMessage.system("You are a helpful assistant."),
         OpenAIMessage.user("the meaning of a word 'category'"),
@@ -95,7 +95,7 @@ void main() {
 
   test("generating an image from a prompt chatGPT created", () async {
     final chatCompletion = await _client.chat.chatCompletion(
-      model: OpenAIModelType.gpt_4o_2024_05_13,
+      model: OpenAIModelType.gpt_4o_mini,
       messages: [
         OpenAIMessage.system("You are a helpful assistant."),
         OpenAIMessage.user("generate image of cat"),
@@ -118,7 +118,7 @@ void main() {
 
   test('chat completion image input', () async {
     final chatCompletion = await _client.chat.chatCompletion(
-      model: OpenAIModelType.gpt_4o_2024_05_13,
+      model: OpenAIModelType.gpt_4o_mini,
       messages: [
         OpenAIMessage.system("You are a helpful assistant."),
         OpenAIMessage.imageUrl(
